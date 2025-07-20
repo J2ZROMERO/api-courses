@@ -24,6 +24,11 @@ class Element extends Model
         return $this->belongsTo(Section::class);
     }
 
+    public function elementProgress()
+    {
+        return $this->hasOne(ElementProgress::class);
+    }
+
     public function scopeSectionIs($query, $section)
     {
         if (is_null($section)) {
