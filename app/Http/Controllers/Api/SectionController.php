@@ -167,8 +167,9 @@ class SectionController extends Controller
      *     @OA\Response(response=404, description="Curso no encontrado")
      * )
      */
-    public function show(Section $section)
+    public function show($id)
     {
+        $section = Section::findOrFail($id);
         return response()->json([
             'message' => 'Detalles de la sección',
             'data'    => $section,
@@ -209,8 +210,9 @@ class SectionController extends Controller
      *     )
      * )
      */
-    public function update(Request $request, Section $section)
+    public function update(Request $request, $id)
     {
+        $section = Section::findOrFail($id);
         $section->update($request->all());
         return response()->json([
             'message' => 'Sección actualizado',
@@ -233,8 +235,9 @@ class SectionController extends Controller
      *     @OA\Response(response=204, description="Sección eliminado")
      * )
      */
-    public function destroy(Section $section)
+    public function destroy($id)
     {
+        $section = Section::findOrFail($id);
         $section->delete();
         return response()->json([
             'message' => 'Sección eliminado'

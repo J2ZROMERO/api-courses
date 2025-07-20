@@ -150,8 +150,9 @@ class CourseController extends Controller
      *     @OA\Response(response=404, description="Curso no encontrado")
      * )
      */
-    public function show(Course $course)
+    public function show($id)
     {
+        $course = Course::findOrFail($id);
         return response()->json([
             'message' => 'Detalles del curso',
             'data'    => $course,
@@ -184,8 +185,9 @@ class CourseController extends Controller
      *     )
      * )
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request, $id)
     {
+        $course = Course::findOrFail($id);
         $course->update($request->all());
         return response()->json([
             'message' => 'Curso actualizado',
@@ -208,8 +210,9 @@ class CourseController extends Controller
      *     @OA\Response(response=204, description="Curso eliminado")
      * )
      */
-    public function destroy(Course $course)
+    public function destroy($id)
     {
+        $course = Course::findOrFail($id);
         $course->delete();
         return response()->json([
             'message' => 'Curso eliminado'
