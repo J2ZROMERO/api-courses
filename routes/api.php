@@ -34,5 +34,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{id}', [ElementController::class, 'show']);
         Route::put('/{id}', [ElementController::class, 'update']);
         Route::delete('/{id}', [ElementController::class, 'destroy']);
+        Route::post('/progress', [ElementController::class, 'progress']);
     });
 });

@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ElementRequest;
+use App\Http\Requests\ProgressRequest;
 use App\Models\Element;
+use App\Models\ElementProgress;
 use Illuminate\Http\Request;
+use Laravel\Prompts\Progress;
 
 class ElementController extends Controller
 {
@@ -255,5 +258,54 @@ class ElementController extends Controller
         return response()->json([
             'message' => 'Elemento eliminado'
         ], 204);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/elements/progress",
+     *     summary="Marcar como visto",
+     *     security={{"bearerAuth":{}}},
+     *     tags={"Elements"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"user_id", "element_id"},
+     *             @OA\Property(property="element_id", type="integer", example=1),
+     *             @OA\Property(property="user_id", type="integer", example=1),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Se ha registrado en un curso"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Errores de validación",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             example={
+     *                 "message": "The given data was invalid.",
+     *                 "errors": {
+     *                     "title": {
+     *                         "The title field is required."
+     *                     },
+     *                     "description": {
+     *                         "The description must be at least 10 characters."
+     *                     },
+     *                      "created_by": {
+     *                         "The user doesnt exist."
+     *                     }
+     *                 }
+     *             }
+     *         )
+     *     )
+     * )
+     */
+    public function progress(ProgressRequest $request)
+    {
+        ElementProgress::create($request->all());
+        return response()->json([
+            'message' => 'Se ha guardado el progreso'
+        ], 201);
     }
 }

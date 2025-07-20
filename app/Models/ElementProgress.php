@@ -16,7 +16,7 @@ class ElementProgress extends Model
         'user_id',
         'element_id',
         'completed',
-        'completed'
+        'completed_at'
     ];
 
     public function element()

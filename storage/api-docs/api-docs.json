@@ -519,7 +519,7 @@
                 "tags": [
                     "Courses"
                 ],
-                "summary": "Registrarse a Course",
+                "summary": "Registrarse a Curso",
                 "operationId": "9dd5bb3477155179e12c8281839906c6",
                 "requestBody": {
                     "required": true,
@@ -547,7 +547,7 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Se ha registrado en curso"
+                        "description": "Se ha registrado en un curso"
                     },
                     "422": {
                         "description": "Errores de validación",
@@ -1058,6 +1058,73 @@
                 "responses": {
                     "204": {
                         "description": "Elemento eliminado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/elements/progress": {
+            "post": {
+                "tags": [
+                    "Elements"
+                ],
+                "summary": "Marcar como visto",
+                "operationId": "90f667e2a7121e2223831245e4b4bc31",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "user_id",
+                                    "element_id"
+                                ],
+                                "properties": {
+                                    "element_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Se ha registrado en un curso"
+                    },
+                    "422": {
+                        "description": "Errores de validación",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "message": "The given data was invalid.",
+                                    "errors": {
+                                        "title": [
+                                            "The title field is required."
+                                        ],
+                                        "description": [
+                                            "The description must be at least 10 characters."
+                                        ],
+                                        "created_by": [
+                                            "The user doesnt exist."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
