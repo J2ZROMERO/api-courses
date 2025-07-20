@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('video_progress', function (Blueprint $table) {
+        Schema::create('element_progress', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('video_id')->constrained('videos')->cascadeOnDelete();
+            $table->foreignId('element_id')->constrained('elements')->cascadeOnDelete();
             $table->boolean('completed')->default(false);
             $table->timestamp('completed_at')->nullable();
             $table->timestamps();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('video_progress');
+        Schema::dropIfExists('element_progress');
     }
 };

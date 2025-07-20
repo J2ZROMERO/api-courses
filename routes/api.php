@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CourseController;
+use App\Http\Controllers\Api\ElementController;
 use App\Http\Controllers\Api\SectionController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{id}', [SectionController::class, 'destroy']);
     });
 
+    Route::prefix('elements')->group(function () {
+        Route::get('/', [ElementController::class, 'index']);
+        Route::post('/', [ElementController::class, 'store']);
+        Route::get('/{id}', [ElementController::class, 'show']);
+        Route::put('/{id}', [ElementController::class, 'update']);
+        Route::delete('/{id}', [ElementController::class, 'destroy']);
+    });
 });

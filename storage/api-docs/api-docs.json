@@ -491,6 +491,492 @@
                 ]
             }
         },
+        "/api/elements": {
+            "get": {
+                "tags": [
+                    "Elements"
+                ],
+                "summary": "Listar elementos con paginación",
+                "operationId": "c177f3ebafb102c0851b4a065cdd9d2a",
+                "parameters": [
+                    {
+                        "name": "section",
+                        "in": "query",
+                        "description": "Filtrar elementos por ID de sección",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Listado de elementos paginadas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Listado de elementos"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "title": {
+                                                                "type": "string",
+                                                                "example": "Curso de Laravel"
+                                                            },
+                                                            "url": {
+                                                                "type": "string",
+                                                                "example": "https://github.com"
+                                                            },
+                                                            "position": {
+                                                                "type": "integer",
+                                                                "example": 0
+                                                            },
+                                                            "seccion_id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "type": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2025-07-19T15:55:10.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2025-07-19T15:55:10.000000Z"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "first_page_url": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8000/api/elements?page=1"
+                                                },
+                                                "from": {
+                                                    "type": "integer",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "last_page": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "last_page_url": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8000/api/elements?page=1"
+                                                },
+                                                "links": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "url": {
+                                                                "type": "string",
+                                                                "example": null,
+                                                                "nullable": true
+                                                            },
+                                                            "label": {
+                                                                "type": "string",
+                                                                "example": "&laquo; Previous"
+                                                            },
+                                                            "active": {
+                                                                "type": "boolean",
+                                                                "example": false
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "next_page_url": {
+                                                    "type": "string",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "path": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8000/api/elements"
+                                                },
+                                                "per_page": {
+                                                    "type": "integer",
+                                                    "example": 15
+                                                },
+                                                "prev_page_url": {
+                                                    "type": "string",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "to": {
+                                                    "type": "integer",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "total": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Elements"
+                ],
+                "summary": "Crear nuevo elemento",
+                "operationId": "77951ef0f70d57db380d68fd96f65ac8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "position",
+                                    "section_id",
+                                    "type"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "elemento de Laravel"
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "example": "https://github.com"
+                                    },
+                                    "position": {
+                                        "type": "integer",
+                                        "example": 0
+                                    },
+                                    "section_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "type": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Seccion creado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Seccion de Laravel"
+                                        },
+                                        "url": {
+                                            "type": "string",
+                                            "example": "https://github.com"
+                                        },
+                                        "type": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "position": {
+                                            "type": "string",
+                                            "example": 0
+                                        },
+                                        "section_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-19T15:55:10.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-19T15:55:10.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Errores de validación",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "message": "The given data was invalid.",
+                                    "errors": {
+                                        "title": [
+                                            "The title field is required."
+                                        ],
+                                        "position": [
+                                            "The position column must be an integer."
+                                        ],
+                                        "seccion_id": [
+                                            "The seccion doesnt exist."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/elements/{id}": {
+            "get": {
+                "tags": [
+                    "Elements"
+                ],
+                "summary": "Mostrar una seccion por ID",
+                "operationId": "984b2401bf5298f35533ce9516a60256",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalles de la sección",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Seccion de Laravel"
+                                        },
+                                        "url": {
+                                            "type": "string",
+                                            "example": "https://github.com"
+                                        },
+                                        "type": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "position": {
+                                            "type": "string",
+                                            "example": 0
+                                        },
+                                        "section_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-19T15:55:10.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-19T15:55:10.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Curso no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Elements"
+                ],
+                "summary": "Actualizar una sección",
+                "operationId": "dcdbc79c4eb472f36462cda0b8eef47b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Elemento actualizado"
+                                    },
+                                    "position": {
+                                        "type": "integer",
+                                        "example": 0
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "example": "https://github.com"
+                                    },
+                                    "type": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "section_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Seccion actualizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Seccion de Laravel"
+                                        },
+                                        "url": {
+                                            "type": "string",
+                                            "example": "https://github.com"
+                                        },
+                                        "type": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "position": {
+                                            "type": "string",
+                                            "example": 0
+                                        },
+                                        "section_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-19T15:55:10.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-19T15:55:10.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Elements"
+                ],
+                "summary": "Eliminar un elemento",
+                "operationId": "38dafc02d4ce105fdac0fe7f1e31ec95",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Elemento eliminado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/sections": {
             "get": {
                 "tags": [
@@ -976,6 +1462,10 @@
         {
             "name": "Courses",
             "description": "Courses"
+        },
+        {
+            "name": "Elements",
+            "description": "Elements"
         },
         {
             "name": "Sections",
