@@ -528,12 +528,18 @@
                             "schema": {
                                 "required": [
                                     "user_id",
-                                    "course_id"
+                                    "course_ids"
                                 ],
                                 "properties": {
-                                    "course_id": {
-                                        "type": "integer",
-                                        "example": 1
+                                    "course_ids": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "example": [
+                                            1,
+                                            2
+                                        ]
                                     },
                                     "user_id": {
                                         "type": "integer",
@@ -1720,10 +1726,6 @@
                                     "email"
                                 ],
                                 "properties": {
-                                    "id": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
                                     "name": {
                                         "type": "string",
                                         "example": "Juan Pérez"
@@ -1987,73 +1989,6 @@
                     }
                 ]
             }
-        },
-        "/api/users/progress": {
-            "post": {
-                "tags": [
-                    "users"
-                ],
-                "summary": "Marcar como visto",
-                "operationId": "bf35a052b8b37c62f2bb125f677fde9c",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "user_id",
-                                    "User_id"
-                                ],
-                                "properties": {
-                                    "User_id": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
-                                    "user_id": {
-                                        "type": "integer",
-                                        "example": 1
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Se ha registrado en un curso"
-                    },
-                    "422": {
-                        "description": "Errores de validación",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                },
-                                "example": {
-                                    "message": "The given data was invalid.",
-                                    "errors": {
-                                        "title": [
-                                            "The title field is required."
-                                        ],
-                                        "description": [
-                                            "The description must be at least 10 characters."
-                                        ],
-                                        "created_by": [
-                                            "The user doesnt exist."
-                                        ]
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
         }
     },
     "components": {
@@ -2119,10 +2054,6 @@
         {
             "name": "Users",
             "description": "Users"
-        },
-        {
-            "name": "users",
-            "description": "users"
         }
     ]
 }

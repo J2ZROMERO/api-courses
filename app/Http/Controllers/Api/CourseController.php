@@ -228,13 +228,22 @@ class CourseController extends Controller
      *     security={{"bearerAuth":{}}},
      *     tags={"Courses"},
      *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *             required={"user_id", "course_id"},
-     *             @OA\Property(property="course_id", type="integer", example=1),
-     *             @OA\Property(property="user_id", type="integer", example=1),
-     *         )
-     *     ),
+     *           required=true,
+     *           @OA\JsonContent(
+     *               required={"user_id", "course_ids"},
+     *               @OA\Property(
+     *                   property="course_ids",
+     *                   type="array",
+     *                   @OA\Items(type="integer"),       
+     *                   example={1, 2}                  
+     *               ),
+     *               @OA\Property(
+     *                   property="user_id",
+     *                   type="integer",
+     *                  example=1
+     *               )
+     *           )
+     *       ),
      *     @OA\Response(
      *         response=201,
      *         description="Se ha registrado en un curso"
@@ -265,7 +274,7 @@ class CourseController extends Controller
     public function signInToCourse(SignInToCourseRequest $request)
     {
         $user = User::findOrFail($request->user_id);
-        $user->signInCourses()->syncWithoutDetaching([$request->course_id]);
+        $user->signInCourses()->sync($request->course_ids);
         return response()->json([
             'message' => 'Se ha registrado en curso'
         ], 201);

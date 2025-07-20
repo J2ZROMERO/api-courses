@@ -23,7 +23,7 @@ class SignInToCourseRequest extends FormRequest
     {
         return [
             "user_id" => "required|exists:users,id",
-            "course_id" => "required|exists:courses,id",
+            "course_ids" => "required|array",
         ];
     }
 }
