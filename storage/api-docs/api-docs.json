@@ -35,12 +35,12 @@
                                     "email": {
                                         "type": "string",
                                         "format": "email",
-                                        "example": "test@example.com"
+                                        "example": "teacher@example.com"
                                     },
                                     "password": {
                                         "type": "string",
                                         "format": "password",
-                                        "example": "password123"
+                                        "example": "password"
                                     }
                                 },
                                 "type": "object"
@@ -58,6 +58,35 @@
                                         "token": {
                                             "type": "string",
                                             "example": "1|aVv1...N2sG"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Juan Pérez"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "juan@example.com"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "roles": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    }
+                                                },
+                                                "type": "string"
+                                            }
                                         }
                                     },
                                     "type": "object"

@@ -20,8 +20,8 @@ class AuthController extends Controller
      *         required=true,
      *         @OA\JsonContent(
      *             required={"email","password"},
-     *             @OA\Property(property="email", type="string", format="email", example="test@example.com"),
-     *             @OA\Property(property="password", type="string", format="password", example="password123")
+     *             @OA\Property(property="email", type="string", format="email", example="teacher@example.com"),
+     *             @OA\Property(property="password", type="string", format="password", example="password")
      *         )
      *     ),
      *     @OA\Response(
@@ -29,6 +29,18 @@ class AuthController extends Controller
      *         description="Successful login",
      *         @OA\JsonContent(
      *             @OA\Property(property="token", type="string", example="1|aVv1...N2sG"),
+     *             @OA\Property(property="user", type="object",
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="name", type="string", example="Juan Pérez"),
+     *                 @OA\Property(property="email", type="string", example="juan@example.com")
+     *             ),
+     *             @OA\Property(
+     *                     property="roles",
+     *                     type="array",
+     *                     @OA\Items(
+     *                         type="string"
+     *                    )
+     *                 ),
      *         )
      *     ),
      *     @OA\Response(
@@ -49,7 +61,8 @@ class AuthController extends Controller
 
         return response()->json([
             'token' => $token,
-            'user' => $user
+            'user' => $user,
+            'roles' => $user->getRoleNames()
         ]);
     }
 
