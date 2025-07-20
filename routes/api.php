@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Route;
 Route::Post('/login', [AuthController::class, 'login']);
 Route::Post('/register', [AuthController::class, 'register']);
 
-
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('courses')->group(function () {
         Route::get('/', [CourseController::class, 'index']);
@@ -18,6 +17,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/{id}', [CourseController::class, 'update']);
         Route::delete('/{id}', [CourseController::class, 'destroy']);
     });
+    
+    Route::post('/sign-to-course', [CourseController::class, 'signInToCourse']);
 
     Route::prefix('sections')->group(function () {
         Route::get('/', [SectionController::class, 'index']);

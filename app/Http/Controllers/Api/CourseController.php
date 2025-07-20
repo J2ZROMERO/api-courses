@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseRequest;
+use App\Http\Requests\SignInToCourseRequest;
 use App\Models\Course;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -217,5 +219,55 @@ class CourseController extends Controller
         return response()->json([
             'message' => 'Curso eliminado'
         ], 204);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/sign-to-course",
+     *     summary="Registrarse a Curso",
+     *     security={{"bearerAuth":{}}},
+     *     tags={"Courses"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"user_id", "course_id"},
+     *             @OA\Property(property="course_id", type="integer", example=1),
+     *             @OA\Property(property="user_id", type="integer", example=1),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Se ha registrado en un curso"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Errores de validación",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             example={
+     *                 "message": "The given data was invalid.",
+     *                 "errors": {
+     *                     "title": {
+     *                         "The title field is required."
+     *                     },
+     *                     "description": {
+     *                         "The description must be at least 10 characters."
+     *                     },
+     *                      "created_by": {
+     *                         "The user doesnt exist."
+     *                     }
+     *                 }
+     *             }
+     *         )
+     *     )
+     * )
+     */
+    public function signInToCourse(SignInToCourseRequest $request)
+    {
+        $user = User::findOrFail($request->user_id);
+        $user->signInCourses()->syncWithoutDetaching([$request->course_id]);
+        return response()->json([
+            'message' => 'Se ha registrado en curso'
+        ], 201);
     }
 }
