@@ -166,9 +166,11 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
+        $courses = $user->signInCourses()->get();
         return response()->json([
             'message' => 'Detalles del Usuario',
-            'data'    => $user,
+            'user' => $user,
+            'data' => $courses,
         ], 200);
     }
 
