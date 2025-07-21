@@ -5,6 +5,9 @@ RUN apt-get update && apt-get install -y \
     git unzip curl libzip-dev libpq-dev zip \
     && docker-php-ext-install pdo pdo_pgsql zip
 
+# Habilita mod_rewrite de Apache (necesario para Laravel)
+RUN a2enmod rewrite
+
 # Instala Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -14,20 +17,20 @@ WORKDIR /var/www/html
 # Copia el proyecto Laravel
 COPY . .
 
-# Apache servirá desde /public
+# Configura Apache para servir desde /public
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf \
     && echo "ServerName localhost" >> /etc/apache2/apache2.conf
-
-
-# Habilitar mod_rewrite y permitir .htaccess
-RUN a2enmod rewrite
-RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
 # Asigna permisos para Laravel
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Instala dependencias
+# Instala dependencias PHP de Laravel
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
+# Por defecto ejecuta Apache en primer plano (necesario para Render)
+CMD ["apache2-foreground"]
+
+# Expone el puerto HTTP 80
+EXPOSE 80
