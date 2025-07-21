@@ -1,30 +1,29 @@
-# Usa una imagen base oficial de PHP con Apache
 FROM php:8.2-apache
 
-# Instala dependencias del sistema
+# Instala extensiones necesarias para Laravel y PostgreSQL
 RUN apt-get update && apt-get install -y \
-    git unzip curl libpq-dev libzip-dev zip \
-    libonig-dev libxml2-dev libsqlite3-dev \
-    && docker-php-ext-install pdo pdo_mysql zip
-
-# Habilita mod_rewrite de Apache (necesario para Laravel)
-RUN a2enmod rewrite
+    git unzip curl libzip-dev libpq-dev zip \
+    && docker-php-ext-install pdo pdo_pgsql zip
 
 # Instala Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copia el proyecto al contenedor
-COPY . /var/www/html
-
 # Establece el directorio de trabajo
 WORKDIR /var/www/html
+
+# Copia el proyecto Laravel al contenedor
+COPY . .
+
+# Establece la raíz pública en /public
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
+
+# Configura permisos
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 storage bootstrap/cache
 
 # Instala dependencias de Laravel
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Otorga permisos
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
-
-# Expone el puerto por el que Apache servirá Laravel
+# Expone el puerto estándar HTTP
 EXPOSE 80
