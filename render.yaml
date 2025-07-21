@@ -23,3 +23,5 @@ services:
         value: https://laravel-app-0zoz.onrender.com/
       - key: DATABASE_URL
         value: postgresql://laravel_user:v17Nmzq9LOIHQOXFpUls89grt7ytHHMD@dpg-d1up906r433s73f094lg-a/api_cursos_2qhk
+      - key: SESSION_DRIVER
+        value: database
