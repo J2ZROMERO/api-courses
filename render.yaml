@@ -11,13 +11,16 @@ services:
       php artisan storage:link
       php artisan migrate --force
       php artisan db:seed --force
+      php artisan l5-swagger:generate
     envVars:
       - key: APP_ENV
         value: production
       - key: APP_KEY
-        generateValue: true
+        value: base64:3x7hh3sq4SaGeNF9GNbXIrljs0tG9GjBw9d5WfRGRZg=
       - key: APP_DEBUG
         value: false
+      - key: L5_SWAGGER_CONST_HOST
+        value: https://laravel-app-0zoz.onrender.com/
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
