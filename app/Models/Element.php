@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Element extends Model
 {
@@ -18,6 +20,8 @@ class Element extends Model
         'type',
         'url'
     ];
+
+    protected $appends = ['status_progress'];
 
     public function section()
     {
@@ -36,5 +40,19 @@ class Element extends Model
         }
 
         return $query->where('section_id', $section);
+    }
+
+    public function getStatusProgressAttribute()
+    {
+        $user = Auth::user();
+
+        if (!$user || !$user->hasRole('student')) {
+            return false;
+        }
+
+        return DB::table('element_progress')
+            ->where('user_id', $user->id)
+            ->where('element_id', $this->id)
+            ->exists();
     }
 }

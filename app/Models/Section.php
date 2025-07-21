@@ -22,6 +22,11 @@ class Section extends Model
         return $this->belongsTo(Course::class);
     }
 
+    public function elements()
+    {
+        return $this->hasMany(Element::class);
+    }
+
     public function scopeCourseIs($query, $course)
     {
         if (is_null($course)) {
