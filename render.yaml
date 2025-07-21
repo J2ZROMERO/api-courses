@@ -5,20 +5,21 @@ services:
     plan: free
     branch: main
     dockerfilePath: ./Dockerfile
-    buildCommand: |
-      composer install
-      php artisan key:generate
-      php artisan storage:link
-      php artisan migrate --force
-      php artisan db:seed --force
-      php artisan l5-swagger:generate
+    startCommand: |
+      php artisan config:cache && \
+      php artisan key:generate && \
+      php artisan migrate --force && \
+      php artisan db:seed --force && \
+      php artisan storage:link && \
+      php artisan l5-swagger:generate && \
+      apache2-foreground
     envVars:
       - key: APP_ENV
         value: production
       - key: APP_KEY
         value: base64:3x7hh3sq4SaGeNF9GNbXIrljs0tG9GjBw9d5WfRGRZg=
       - key: APP_DEBUG
-        value: false
+        value: true # Temporalmente TRUE para ver errores
       - key: L5_SWAGGER_CONST_HOST
         value: https://laravel-app-0zoz.onrender.com/
       - key: DB_CONNECTION
