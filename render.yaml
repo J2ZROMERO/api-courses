@@ -12,16 +12,3 @@ services:
       php artisan storage:link && \
       php artisan l5-swagger:generate && \
       apache2-foreground
-    envVars:
-      - key: APP_ENV
-        value: production
-      - key: APP_KEY
-        value: base64:3x7hh3sq4SaGeNF9GNbXIrljs0tG9GjBw9d5WfRGRZg=
-      - key: APP_DEBUG
-        value: true # Temporalmente TRUE para ver errores
-      - key: L5_SWAGGER_CONST_HOST
-        value: https://laravel-app-0zoz.onrender.com/
-      - key: DATABASE_URL
-        value: postgresql://laravel_user:v17Nmzq9LOIHQOXFpUls89grt7ytHHMD@dpg-d1up906r433s73f094lg-a/api_cursos_2qhk
-      - key: SESSION_DRIVER
-        value: database
