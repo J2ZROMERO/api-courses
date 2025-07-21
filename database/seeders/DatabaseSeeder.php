@@ -199,7 +199,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_1->id,
             'position' => 0,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_a2 = Element::updateOrCreate(
@@ -211,7 +211,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_1->id,
             'position' => 1,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_a3 = Element::updateOrCreate(
@@ -223,7 +223,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_1->id,
             'position' => 2,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_a4 = Element::updateOrCreate(
@@ -235,7 +235,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_2->id,
             'position' => 0,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_a5 = Element::updateOrCreate(
@@ -247,7 +247,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_2->id,
             'position' => 1,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_a6 = Element::updateOrCreate(
@@ -259,7 +259,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_2->id,
             'position' => 2,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_a7 = Element::updateOrCreate(
@@ -271,7 +271,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_3->id,
             'position' => 0,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_a8 = Element::updateOrCreate(
@@ -283,7 +283,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_3->id,
             'position' => 1,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_a9 = Element::updateOrCreate(
@@ -295,7 +295,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_3->id,
             'position' => 2,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_b1 = Element::updateOrCreate(
@@ -307,7 +307,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_4->id,
             'position' => 0,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_b2 = Element::updateOrCreate(
@@ -319,7 +319,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_4->id,
             'position' => 1,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_b3 = Element::updateOrCreate(
@@ -331,7 +331,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_4->id,
             'position' => 2,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_b4 = Element::updateOrCreate(
@@ -343,7 +343,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_5->id,
             'position' => 0,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_b5 = Element::updateOrCreate(
@@ -355,7 +355,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_5->id,
             'position' => 1,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_b6 = Element::updateOrCreate(
@@ -367,7 +367,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_5->id,
             'position' => 2,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_b7 = Element::updateOrCreate(
@@ -379,7 +379,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_6->id,
             'position' => 0,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_b8 = Element::updateOrCreate(
@@ -391,7 +391,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_6->id,
             'position' => 1,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_b9 = Element::updateOrCreate(
@@ -403,7 +403,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_6->id,
             'position' => 2,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_c1 = Element::updateOrCreate(
@@ -415,7 +415,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_7->id,
             'position' => 0,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_c2 = Element::updateOrCreate(
@@ -427,7 +427,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_7->id,
             'position' => 1,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_c3 = Element::updateOrCreate(
@@ -439,7 +439,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_7->id,
             'position' => 2,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_c4 = Element::updateOrCreate(
@@ -451,7 +451,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_8->id,
             'position' => 0,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_c5 = Element::updateOrCreate(
@@ -463,7 +463,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_8->id,
             'position' => 1,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_c6 = Element::updateOrCreate(
@@ -475,7 +475,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_8->id,
             'position' => 2,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_c7 = Element::updateOrCreate(
@@ -487,7 +487,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_9->id,
             'position' => 0,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_c8 = Element::updateOrCreate(
@@ -499,7 +499,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_9->id,
             'position' => 1,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
         $element_c9 = Element::updateOrCreate(
@@ -511,7 +511,7 @@ class DatabaseSeeder extends Seeder
             'section_id' => $section_9->id,
             'position' => 2,
             'type' => 1,
-            'url' => "https://www.youtube.com/watch?v=PGQxIILBb7M",
+            'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
 
     }
