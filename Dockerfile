@@ -1,36 +1,30 @@
 FROM php:8.2-apache
 
-# Instala extensiones necesarias
+# Instala extensiones y librerías necesarias para Laravel
 RUN apt-get update && apt-get install -y \
-    git unzip curl libzip-dev libpq-dev zip \
-    && docker-php-ext-install pdo pdo_pgsql zip
-
-# Habilita mod_rewrite de Apache (necesario para Laravel)
-RUN a2enmod rewrite
+    git unzip curl libzip-dev libpq-dev zip libonig-dev libxml2-dev libicu-dev \
+  && docker-php-ext-install \
+    pdo pdo_pgsql zip \
+    mbstring xml bcmath intl \
+  && a2enmod rewrite
 
 # Instala Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Establece el directorio de trabajo
 WORKDIR /var/www/html
-
-# Copia el proyecto Laravel
 COPY . .
 
-# Configura Apache para servir desde /public
+# Ajusta el DocumentRoot de Apache
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf \
-    && echo "ServerName localhost" >> /etc/apache2/apache2.conf
+  && echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Asigna permisos para Laravel
+# Permisos para storage y cache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
-    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+  && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Instala dependencias PHP de Laravel
+# Dependencias de Composer
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Por defecto ejecuta Apache en primer plano (necesario para Render)
-CMD ["apache2-foreground"]
-
-# Expone el puerto HTTP 80
 EXPOSE 80
+CMD ["apache2-foreground"]
