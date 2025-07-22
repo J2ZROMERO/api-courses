@@ -21,6 +21,11 @@ class Question extends Model
         return $this->belongsTo(Element::class);
     }
 
+    public function options()
+    {
+        return $this->hasMany(Option::class);
+    }
+
     public function scopeElementIs($query, $element)
     {
         if (is_null($element)) {
