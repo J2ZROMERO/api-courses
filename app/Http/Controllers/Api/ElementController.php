@@ -113,7 +113,9 @@ class ElementController extends Controller
      *             @OA\Property(property="position", type="string", example=0),
      *             @OA\Property(property="section_id", type="integer", example=1),
      *             @OA\Property(property="created_at", type="string", format="date-time", example="2025-07-19T15:55:10.000000Z"),
-     *             @OA\Property(property="updated_at", type="string", format="date-time", example="2025-07-19T15:55:10.000000Z")
+     *             @OA\Property(property="updated_at", type="string", format="date-time", example="2025-07-19T15:55:10.000000Z"),
+     *             @OA\Property(property="status_progress", type="boolean", example=false),
+     *             @OA\Property(property="unlock", type="boolean", example=false)
      *         ),
      *     ),
      *     @OA\Response(
@@ -167,12 +169,14 @@ class ElementController extends Controller
      *             type="object",
      *             @OA\Property(property="id", type="integer", example=1),
      *             @OA\Property(property="title", type="string", example="Seccion de Laravel"),
-     *              @OA\Property(property="url", type="string", example="https://github.com"),
+     *             @OA\Property(property="url", type="string", example="https://github.com"),
      *             @OA\Property(property="type", type="integer", example=1),
      *             @OA\Property(property="position", type="string", example=0),
      *             @OA\Property(property="section_id", type="integer", example=1),
      *             @OA\Property(property="created_at", type="string", format="date-time", example="2025-07-19T15:55:10.000000Z"),
-     *             @OA\Property(property="updated_at", type="string", format="date-time", example="2025-07-19T15:55:10.000000Z")
+     *             @OA\Property(property="updated_at", type="string", format="date-time", example="2025-07-19T15:55:10.000000Z"),
+     *             @OA\Property(property="status_progress", type="boolean", example=false),
+     *             @OA\Property(property="unlock", type="boolean", example=false)
      *         ),
      *     ),
      *     @OA\Response(response=404, description="Curso no encontrado")

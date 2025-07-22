@@ -523,6 +523,10 @@
                                                                         "status_progress": {
                                                                             "type": "boolean",
                                                                             "example": false
+                                                                        },
+                                                                        "unlock": {
+                                                                            "type": "boolean",
+                                                                            "example": false
                                                                         }
                                                                     },
                                                                     "type": "object"
@@ -946,6 +950,14 @@
                                             "type": "string",
                                             "format": "date-time",
                                             "example": "2025-07-19T15:55:10.000000Z"
+                                        },
+                                        "status_progress": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "unlock": {
+                                            "type": "boolean",
+                                            "example": false
                                         }
                                     },
                                     "type": "object"
@@ -1042,6 +1054,14 @@
                                             "type": "string",
                                             "format": "date-time",
                                             "example": "2025-07-19T15:55:10.000000Z"
+                                        },
+                                        "status_progress": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "unlock": {
+                                            "type": "boolean",
+                                            "example": false
                                         }
                                     },
                                     "type": "object"

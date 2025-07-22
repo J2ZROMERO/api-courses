@@ -185,7 +185,21 @@ class CourseController extends Controller
      *                                 @OA\Property(property="type", type="integer", example=1),
      *                                 @OA\Property(property="created_at", type="string", format="date-time", example="2025-07-20T16:20:58.000000Z"),
      *                                 @OA\Property(property="updated_at", type="string", format="date-time", example="2025-07-20T16:20:58.000000Z"),
-     *                                 @OA\Property(property="status_progress", type="boolean", example=false)
+     *                                 @OA\Property(property="status_progress", type="boolean", example=false),
+     *                                 @OA\Property(property="unlock", type="boolean", example=false)
+     *                             ),
+     *                              @OA\Items(
+     *                                 type="object",
+     *                                 @OA\Property(property="id", type="integer", example=3),
+     *                                 @OA\Property(property="section_id", type="integer", example=2),
+     *                                 @OA\Property(property="title", type="string", example="Elemento A2"),
+     *                                 @OA\Property(property="url", type="string", format="url", example="https://www.youtube.com/watch?v=PGQxIILBb7M"),
+     *                                 @OA\Property(property="position", type="integer", example=0),
+     *                                 @OA\Property(property="type", type="integer", example=1),
+     *                                 @OA\Property(property="created_at", type="string", format="date-time", example="2025-07-20T16:20:58.000000Z"),
+     *                                 @OA\Property(property="updated_at", type="string", format="date-time", example="2025-07-20T16:20:58.000000Z"),
+     *                                 @OA\Property(property="status_progress", type="boolean", example=false),
+     *                                 @OA\Property(property="unlock", type="boolean", example=false)
      *                             )
      *                         )
      *                     )
