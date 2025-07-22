@@ -107,7 +107,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'course_id' => $course_one->id,
-            'position' => 0
+            'position' => 1
         ]);
 
         $section_2 = Section::updateOrCreate(
@@ -117,7 +117,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'course_id' => $course_one->id,
-            'position' => 1
+            'position' => 2
         ]);
 
         $section_3 = Section::updateOrCreate(
@@ -127,7 +127,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'course_id' => $course_one->id,
-            'position' => 2
+            'position' => 3
         ]);
 
         $section_4 = Section::updateOrCreate(
@@ -137,7 +137,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'course_id' => $course_two->id,
-            'position' => 0
+            'position' => 1
         ]);
 
         $section_5 = Section::updateOrCreate(
@@ -147,7 +147,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'course_id' => $course_two->id,
-            'position' => 1
+            'position' => 2
         ]);
 
         $section_6 = Section::updateOrCreate(
@@ -157,7 +157,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'course_id' => $course_two->id,
-            'position' => 2
+            'position' => 3
         ]);
 
         $section_7 = Section::updateOrCreate(
@@ -167,7 +167,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'course_id' => $course_three->id,
-            'position' => 0
+            'position' => 1
         ]);
 
         $section_8 = Section::updateOrCreate(
@@ -177,7 +177,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'course_id' => $course_three->id,
-            'position' => 1
+            'position' => 2
         ]);
 
         $section_9 = Section::updateOrCreate(
@@ -187,7 +187,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'course_id' => $course_three->id,
-            'position' => 2
+            'position' => 3
         ]);
 
         $element_a1 = Element::updateOrCreate(
@@ -197,7 +197,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_1->id,
-            'position' => 0,
+            'position' => 1,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -209,7 +209,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_1->id,
-            'position' => 1,
+            'position' => 2,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -221,7 +221,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_1->id,
-            'position' => 2,
+            'position' => 3,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -233,7 +233,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_2->id,
-            'position' => 0,
+            'position' => 1,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -245,7 +245,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_2->id,
-            'position' => 1,
+            'position' => 2,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -257,7 +257,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_2->id,
-            'position' => 2,
+            'position' => 3,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -269,7 +269,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_3->id,
-            'position' => 0,
+            'position' => 1,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -281,7 +281,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_3->id,
-            'position' => 1,
+            'position' => 2,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -293,7 +293,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_3->id,
-            'position' => 2,
+            'position' => 3,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -305,7 +305,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_4->id,
-            'position' => 0,
+            'position' => 1,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -317,7 +317,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_4->id,
-            'position' => 1,
+            'position' => 2,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -329,7 +329,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_4->id,
-            'position' => 2,
+            'position' => 3,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -341,7 +341,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_5->id,
-            'position' => 0,
+            'position' => 1,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -353,7 +353,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_5->id,
-            'position' => 1,
+            'position' => 2,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -365,7 +365,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_5->id,
-            'position' => 2,
+            'position' => 3,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -377,7 +377,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_6->id,
-            'position' => 0,
+            'position' => 1,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -389,7 +389,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_6->id,
-            'position' => 1,
+            'position' => 2,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -401,7 +401,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_6->id,
-            'position' => 2,
+            'position' => 3,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -413,7 +413,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_7->id,
-            'position' => 0,
+            'position' => 1,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -425,7 +425,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_7->id,
-            'position' => 1,
+            'position' => 2,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -437,7 +437,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_7->id,
-            'position' => 2,
+            'position' => 3,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -449,7 +449,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_8->id,
-            'position' => 0,
+            'position' => 1,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -461,7 +461,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_8->id,
-            'position' => 1,
+            'position' => 2,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -473,7 +473,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_8->id,
-            'position' => 2,
+            'position' => 3,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -485,7 +485,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_9->id,
-            'position' => 0,
+            'position' => 1,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -497,7 +497,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_9->id,
-            'position' => 1,
+            'position' => 2,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
@@ -509,7 +509,7 @@ class DatabaseSeeder extends Seeder
         [
             
             'section_id' => $section_9->id,
-            'position' => 2,
+            'position' => 3,
             'type' => 1,
             'url' => "https://www.youtube.com/embed/apFHxRBXkzg",
         ]);
