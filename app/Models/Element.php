@@ -21,7 +21,7 @@ class Element extends Model
         'url'
     ];
 
-    protected $appends = ['status_progress'];
+    protected $appends = ['status_progress', 'unlock'];
 
     public function section()
     {
@@ -55,4 +55,52 @@ class Element extends Model
             ->where('element_id', $this->id)
             ->exists();
     }
+
+    public function getUnlockAttribute()
+    {
+        $user = Auth::user();
+
+        if (!$user || !$user->hasRole('student')) {
+            return false;
+        }
+
+        // Obtener el curso desde la sección
+        $section = $this->section;
+        if (!$section || !$section->course) {
+            return false;
+        }
+
+        $course = $section->course;
+
+        // Obtener todos los elementos ordenados por sección y por posición
+        $elements = $course->sections()
+            ->with(['elements' => function ($q) {
+                $q->orderBy('position');
+            }])
+            ->orderBy('position')
+            ->get()
+            ->flatMap(function ($section) {
+                return $section->elements;
+            });
+
+        // Buscar la posición del elemento actual
+        $index = $elements->search(function ($e) {
+            return $e->id === $this->id;
+        });
+
+        if ($index === false) {
+            return false;
+        }
+
+        // Si es el primer elemento del curso
+        if ($index === 0) {
+            return true;
+        }
+
+        $previousElement = $elements[$index - 1];
+
+        // Verifica si el elemento anterior tiene progreso
+        return $previousElement->status_progress;
+    }
+
 }
