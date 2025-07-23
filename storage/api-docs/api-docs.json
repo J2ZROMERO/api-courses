@@ -1276,6 +1276,433 @@
                 ]
             }
         },
+        "/api/options": {
+            "get": {
+                "tags": [
+                    "Options"
+                ],
+                "summary": "Listar opciones con paginación",
+                "operationId": "bf647c54bc541968a0dbc4111982da23",
+                "parameters": [
+                    {
+                        "name": "question",
+                        "in": "query",
+                        "description": "Filtrar opciones por ID de pregunta",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Listado de opciones paginadas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Listado de opciones"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "option": {
+                                                                "type": "string",
+                                                                "example": "esta es la respuesta"
+                                                            },
+                                                            "question_id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "is_correct": {
+                                                                "type": "boolean",
+                                                                "example": true
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2025-07-19T15:55:10.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2025-07-19T15:55:10.000000Z"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "first_page_url": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8000/api/options?page=1"
+                                                },
+                                                "from": {
+                                                    "type": "integer",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "last_page": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "last_page_url": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8000/api/options?page=1"
+                                                },
+                                                "links": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "url": {
+                                                                "type": "string",
+                                                                "example": null,
+                                                                "nullable": true
+                                                            },
+                                                            "label": {
+                                                                "type": "string",
+                                                                "example": "&laquo; Previous"
+                                                            },
+                                                            "active": {
+                                                                "type": "boolean",
+                                                                "example": false
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "next_page_url": {
+                                                    "type": "string",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "path": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8000/api/options"
+                                                },
+                                                "per_page": {
+                                                    "type": "integer",
+                                                    "example": 15
+                                                },
+                                                "prev_page_url": {
+                                                    "type": "string",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "to": {
+                                                    "type": "integer",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "total": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Options"
+                ],
+                "summary": "Crear nueva pregunta",
+                "operationId": "9b403a2f22108f8b0db3e14629226158",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "option",
+                                    "question_id",
+                                    "is_correct"
+                                ],
+                                "properties": {
+                                    "option": {
+                                        "type": "string",
+                                        "example": "esta es la respuesta"
+                                    },
+                                    "question_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "is_correct": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Opción creado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "option": {
+                                            "type": "string",
+                                            "example": "esta es la respuesta"
+                                        },
+                                        "question_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "is_correct": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Errores de validación",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "message": "The given data was invalid.",
+                                    "errors": {
+                                        "title": [
+                                            "The title field is required."
+                                        ],
+                                        "position": [
+                                            "The position column must be an integer."
+                                        ],
+                                        "seccion_id": [
+                                            "The seccion doesnt exist."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/options/{id}": {
+            "get": {
+                "tags": [
+                    "options"
+                ],
+                "summary": "Mostrar una opción por ID",
+                "operationId": "0d7a914e4d347ad1265d169d93f7ea17",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalles de la opción",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "option": {
+                                            "type": "string",
+                                            "example": "esta es la respuesta"
+                                        },
+                                        "question_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "is_correct": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-19T15:55:10.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-19T15:55:10.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Opción no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Options"
+                ],
+                "summary": "Actualizar una opción",
+                "operationId": "a57a1ba53855c8dadfdf4e819727f0b1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "option": {
+                                        "type": "string",
+                                        "example": "esta es la respuesta"
+                                    },
+                                    "question_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "is_correct": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Opción actualizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "option": {
+                                            "type": "string",
+                                            "example": "esta es la respuesta"
+                                        },
+                                        "question_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "is_correct": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-19T15:55:10.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-19T15:55:10.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Options"
+                ],
+                "summary": "Eliminar una opción",
+                "operationId": "79b9cd9e3a3b9d159253c24bf51c1323",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Opción eliminado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/questions": {
             "get": {
                 "tags": [
@@ -2580,6 +3007,14 @@
         {
             "name": "Elements",
             "description": "Elements"
+        },
+        {
+            "name": "Options",
+            "description": "Options"
+        },
+        {
+            "name": "options",
+            "description": "options"
         },
         {
             "name": "Questions",

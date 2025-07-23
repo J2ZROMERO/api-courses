@@ -33,6 +33,11 @@ class Element extends Model
         return $this->hasOne(ElementProgress::class);
     }
 
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
+
     public function scopeSectionIs($query, $section)
     {
         if (is_null($section)) {
@@ -97,10 +102,10 @@ class Element extends Model
             return true;
         }
 
-        $previousElement = $elements[$index - 1];
+        $previous1 = $elements[$index - 1] ?? null;
+        $previous2 = $elements[$index - 2] ?? null;
 
-        // Verifica si el elemento anterior tiene progreso
-        return $previousElement->status_progress;
+        // Si alguno de los dos anteriores fue completado
+        return ($previous1 && $previous1->status_progress) || ($previous2 && $previous2->status_progress);
     }
-
 }

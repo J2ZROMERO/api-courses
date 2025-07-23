@@ -3,6 +3,8 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\ElementController;
+use App\Http\Controllers\Api\OptionController;
+use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\SectionController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
@@ -44,5 +46,21 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{id}', [UserController::class, 'show']);
         Route::put('/{id}', [UserController::class, 'update']);
         Route::delete('/{id}', [UserController::class, 'destroy']);
+    });
+
+    Route::prefix('options')->group(function () {
+        Route::get('/', [OptionController::class, 'index']);
+        Route::post('/', [OptionController::class, 'store']);
+        Route::get('/{id}', [OptionController::class, 'show']);
+        Route::put('/{id}', [OptionController::class, 'update']);
+        Route::delete('/{id}', [OptionController::class, 'destroy']);
+    });
+
+    Route::prefix('questions')->group(function () {
+        Route::get('/', [QuestionController::class, 'index']);
+        Route::post('/', [QuestionController::class, 'store']);
+        Route::get('/{id}', [QuestionController::class, 'show']);
+        Route::put('/{id}', [QuestionController::class, 'update']);
+        Route::delete('/{id}', [QuestionController::class, 'destroy']);
     });
 });

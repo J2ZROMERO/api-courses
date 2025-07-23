@@ -217,7 +217,8 @@ class CourseController extends Controller
             },
             'sections.elements' => function ($query) {
                 $query->orderBy('position');
-            }
+            },
+            'sections.elements.questions.options'
         ])->findOrFail($id);
         return response()->json([
             'message' => 'Detalles del curso',

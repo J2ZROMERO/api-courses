@@ -141,7 +141,7 @@ class OptionController extends Controller
      * @OA\Get(
      *     path="/api/options/{id}",
      *     summary="Mostrar una opción por ID",
-     *     tags={"options"},
+     *     tags={"Options"},
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
