@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CertificationController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\ElementController;
 use App\Http\Controllers\Api\OptionController;
@@ -22,6 +23,14 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     
     Route::post('/sign-to-course', [CourseController::class, 'signInToCourse']);
+
+    Route::prefix('certifications')->group(function () {
+        Route::get('/', [CertificationController::class, 'index']);
+        Route::post('/', [CertificationController::class, 'store']);
+        Route::get('/{id}', [CertificationController::class, 'show']);
+        Route::put('/{id}', [CertificationController::class, 'update']);
+        Route::delete('/{id}', [CertificationController::class, 'destroy']);
+    });
 
     Route::prefix('sections')->group(function () {
         Route::get('/', [SectionController::class, 'index']);

@@ -115,7 +115,7 @@ class AuthController extends Controller
         if (!$user_auth || !$user_auth->hasRole('teacher')) {
             $user->assignRole('student');
         }
-
+        
         return response()->json([
             'message' => 'Usuario registrado',
             'data'    => $user,
