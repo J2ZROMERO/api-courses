@@ -172,6 +172,563 @@
                 }
             }
         },
+        "/api/certifications": {
+            "get": {
+                "tags": [
+                    "Certifications"
+                ],
+                "summary": "Listar certificaciones con paginación",
+                "operationId": "1ab393393bdde5ab3ef99eae7f7b4df2",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "description": "Filtrar certificaciones por ID de usuario",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Listado de certificaciones paginados",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Listado de certificaciones"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "title": {
+                                                                "type": "string",
+                                                                "example": "certificación de Laravel"
+                                                            },
+                                                            "description": {
+                                                                "type": "string",
+                                                                "example": "Aprende Laravel desde cero"
+                                                            },
+                                                            "created_by": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2025-07-19T15:55:10.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2025-07-19T15:55:10.000000Z"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "first_page_url": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8000/api/certifications?page=1"
+                                                },
+                                                "from": {
+                                                    "type": "integer",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "last_page": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "last_page_url": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8000/api/certifications?page=1"
+                                                },
+                                                "links": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "url": {
+                                                                "type": "string",
+                                                                "example": null,
+                                                                "nullable": true
+                                                            },
+                                                            "label": {
+                                                                "type": "string",
+                                                                "example": "&laquo; Previous"
+                                                            },
+                                                            "active": {
+                                                                "type": "boolean",
+                                                                "example": false
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "next_page_url": {
+                                                    "type": "string",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "path": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8000/api/certifications"
+                                                },
+                                                "per_page": {
+                                                    "type": "integer",
+                                                    "example": 15
+                                                },
+                                                "prev_page_url": {
+                                                    "type": "string",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "to": {
+                                                    "type": "integer",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "total": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Certifications"
+                ],
+                "summary": "Crear nuevo certificación",
+                "operationId": "91911b9fb3190894ba59d3d68ee9ffbc",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "created_by"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "certificación de Laravel"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Aprende Laravel desde cero"
+                                    },
+                                    "created_by": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "certificación creado exitosamente"
+                    },
+                    "422": {
+                        "description": "Errores de validación",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "message": "The given data was invalid.",
+                                    "errors": {
+                                        "title": [
+                                            "The title field is required."
+                                        ],
+                                        "description": [
+                                            "The description must be at least 10 characters."
+                                        ],
+                                        "created_by": [
+                                            "The user doesnt exist."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/certifications/{id}": {
+            "get": {
+                "tags": [
+                    "Certifications"
+                ],
+                "summary": "Obtener detalles de la certificación con cursos, secciones y elementos",
+                "operationId": "d3c0b7d7fe53c6b264b48ac094a78827",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del certificación",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalles del certificación con con cursos, secciones y elementos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Detalles del certificación"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 10
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Introduccion"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Texto largo de descripción..."
+                                                },
+                                                "created_by": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-07-20T16:20:58.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-07-20T16:20:58.000000Z"
+                                                },
+                                                "sections": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 2
+                                                            },
+                                                            "course_id": {
+                                                                "type": "integer",
+                                                                "example": 10
+                                                            },
+                                                            "title": {
+                                                                "type": "string",
+                                                                "example": "certificación 1 Seccion 1"
+                                                            },
+                                                            "position": {
+                                                                "type": "integer",
+                                                                "example": 0
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2025-07-20T16:20:58.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2025-07-20T16:20:58.000000Z"
+                                                            },
+                                                            "elements": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer",
+                                                                            "example": 2
+                                                                        },
+                                                                        "section_id": {
+                                                                            "type": "integer",
+                                                                            "example": 2
+                                                                        },
+                                                                        "title": {
+                                                                            "type": "string",
+                                                                            "example": "Elemento A1"
+                                                                        },
+                                                                        "url": {
+                                                                            "type": "string",
+                                                                            "format": "url",
+                                                                            "example": "https://www.youtube.com/watch?v=PGQxIILBb7M"
+                                                                        },
+                                                                        "position": {
+                                                                            "type": "integer",
+                                                                            "example": 0
+                                                                        },
+                                                                        "type": {
+                                                                            "type": "integer",
+                                                                            "example": 1
+                                                                        },
+                                                                        "created_at": {
+                                                                            "type": "string",
+                                                                            "format": "date-time",
+                                                                            "example": "2025-07-20T16:20:58.000000Z"
+                                                                        },
+                                                                        "updated_at": {
+                                                                            "type": "string",
+                                                                            "format": "date-time",
+                                                                            "example": "2025-07-20T16:20:58.000000Z"
+                                                                        },
+                                                                        "status_progress": {
+                                                                            "type": "boolean",
+                                                                            "example": false
+                                                                        },
+                                                                        "unlock": {
+                                                                            "type": "boolean",
+                                                                            "example": false
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Certifications"
+                ],
+                "summary": "Actualizar un certificación",
+                "operationId": "8450c0d8adf10d827b17f62a5b7c7f6c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "certificación actualizado"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Descripción actualizada"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "certificación actualizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Course"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Certifications"
+                ],
+                "summary": "Eliminar un certificación",
+                "operationId": "9c2900327cd2ccef871f1477b0889115",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "certificación eliminado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/certifications/{certification}/assign-courses": {
+            "post": {
+                "tags": [
+                    "Certifications"
+                ],
+                "summary": "Asignar cursos a una certificación",
+                "description": "Asocia uno o más cursos existentes a una certificación.",
+                "operationId": "85e80e0587844ac603263435dea2d68f",
+                "parameters": [
+                    {
+                        "name": "certification",
+                        "in": "path",
+                        "description": "ID de la certificación",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "course_ids"
+                                ],
+                                "properties": {
+                                    "course_ids": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "example": [
+                                            1,
+                                            2,
+                                            3
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cursos asignados correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cursos asignados correctamente."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Errores de validación",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "message": "The given data was invalid.",
+                                    "errors": {
+                                        "course_ids": [
+                                            "The course_ids field is required."
+                                        ],
+                                        "course_ids.0": [
+                                            "The selected course_ids.0 is invalid."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Certificación no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/courses": {
             "get": {
                 "tags": [
@@ -1526,7 +2083,7 @@
         "/api/options/{id}": {
             "get": {
                 "tags": [
-                    "options"
+                    "Options"
                 ],
                 "summary": "Mostrar una opción por ID",
                 "operationId": "0d7a914e4d347ad1265d169d93f7ea17",
@@ -3001,6 +3558,10 @@
             "description": "Authentication"
         },
         {
+            "name": "Certifications",
+            "description": "Certifications"
+        },
+        {
             "name": "Courses",
             "description": "Courses"
         },
@@ -3011,10 +3572,6 @@
         {
             "name": "Options",
             "description": "Options"
-        },
-        {
-            "name": "options",
-            "description": "options"
         },
         {
             "name": "Questions",

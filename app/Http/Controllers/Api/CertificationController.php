@@ -285,32 +285,40 @@ class CertificationController extends Controller
         ], 204);
     }
 
+    
     /**
      * @OA\Post(
-     *     path="/api/sign-to-course",
-     *     summary="Registrarse a certificación",
+     *     path="/api/certifications/{certification}/assign-courses",
+     *     summary="Asignar cursos a una certificación",
+     *     description="Asocia uno o más cursos existentes a una certificación.",
+     *     tags={"Certifications"},
      *     security={{"bearerAuth":{}}},
-     *     tags={"certifications"},
+     *     @OA\Parameter(
+     *         name="certification",
+     *         in="path",
+     *         required=true,
+     *         description="ID de la certificación",
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
      *     @OA\RequestBody(
-     *           required=true,
-     *           @OA\JsonContent(
-     *               required={"user_id", "course_ids"},
-     *               @OA\Property(
-     *                   property="course_ids",
-     *                   type="array",
-     *                   @OA\Items(type="integer"),       
-     *                   example={1, 2}                  
-     *               ),
-     *               @OA\Property(
-     *                   property="user_id",
-     *                   type="integer",
-     *                  example=1
-     *               )
-     *           )
-     *       ),
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"course_ids"},
+     *             @OA\Property(
+     *                 property="course_ids",
+     *                 type="array",
+     *                 @OA\Items(type="integer"),
+     *                 example={1, 2, 3}
+     *             )
+     *         )
+     *     ),
      *     @OA\Response(
      *         response=201,
-     *         description="Se ha registrado en un certificación"
+     *         description="Cursos asignados correctamente",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Cursos asignados correctamente.")
+     *         )
      *     ),
      *     @OA\Response(
      *         response=422,
@@ -320,18 +328,19 @@ class CertificationController extends Controller
      *             example={
      *                 "message": "The given data was invalid.",
      *                 "errors": {
-     *                     "title": {
-     *                         "The title field is required."
+     *                     "course_ids": {
+     *                         "The course_ids field is required."
      *                     },
-     *                     "description": {
-     *                         "The description must be at least 10 characters."
-     *                     },
-     *                      "created_by": {
-     *                         "The user doesnt exist."
+     *                     "course_ids.0": {
+     *                         "The selected course_ids.0 is invalid."
      *                     }
      *                 }
      *             }
      *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Certificación no encontrada"
      *     )
      * )
      */

@@ -56,7 +56,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{id}', [UserController::class, 'show']);
         Route::put('/{id}', [UserController::class, 'update']);
         Route::delete('/{id}', [UserController::class, 'destroy']);
-    });{certification}
+    });
 
     Route::prefix('options')->group(function () {
         Route::get('/', [OptionController::class, 'index']);
