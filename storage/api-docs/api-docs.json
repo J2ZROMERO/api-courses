@@ -397,24 +397,26 @@
         "/api/certifications/{id}": {
             "get": {
                 "tags": [
-                    "Certifications"
+                    "certifications"
                 ],
-                "summary": "Obtener detalles de la certificación con cursos, secciones y elementos",
-                "operationId": "d3c0b7d7fe53c6b264b48ac094a78827",
+                "summary": "Obtener detalles de una certificación con sus cursos",
+                "description": "Devuelve una certificación junto con sus cursos, secciones, elementos, preguntas y opciones.",
+                "operationId": "getCertificationDetails",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "ID del certificación",
+                        "description": "ID de la certificación",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "integer",
+                            "example": 1
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Detalles del certificación con con cursos, secciones y elementos",
+                        "description": "Detalles de la certificación",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -427,106 +429,87 @@
                                             "properties": {
                                                 "id": {
                                                     "type": "integer",
-                                                    "example": 10
+                                                    "example": 1
                                                 },
                                                 "title": {
                                                     "type": "string",
-                                                    "example": "Introduccion"
+                                                    "example": "Certificación Full Stack"
                                                 },
                                                 "description": {
                                                     "type": "string",
-                                                    "example": "Texto largo de descripción..."
+                                                    "example": "Incluye cursos de backend y frontend"
                                                 },
-                                                "created_by": {
-                                                    "type": "integer",
-                                                    "example": 3
-                                                },
-                                                "created_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2025-07-20T16:20:58.000000Z"
-                                                },
-                                                "updated_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2025-07-20T16:20:58.000000Z"
-                                                },
-                                                "sections": {
+                                                "courses": {
                                                     "type": "array",
                                                     "items": {
                                                         "properties": {
                                                             "id": {
                                                                 "type": "integer",
-                                                                "example": 2
-                                                            },
-                                                            "course_id": {
-                                                                "type": "integer",
                                                                 "example": 10
                                                             },
                                                             "title": {
                                                                 "type": "string",
-                                                                "example": "certificación 1 Seccion 1"
+                                                                "example": "Curso Laravel"
                                                             },
-                                                            "position": {
-                                                                "type": "integer",
-                                                                "example": 0
-                                                            },
-                                                            "created_at": {
-                                                                "type": "string",
-                                                                "format": "date-time",
-                                                                "example": "2025-07-20T16:20:58.000000Z"
-                                                            },
-                                                            "updated_at": {
-                                                                "type": "string",
-                                                                "format": "date-time",
-                                                                "example": "2025-07-20T16:20:58.000000Z"
-                                                            },
-                                                            "elements": {
+                                                            "sections": {
                                                                 "type": "array",
                                                                 "items": {
                                                                     "properties": {
                                                                         "id": {
                                                                             "type": "integer",
-                                                                            "example": 2
-                                                                        },
-                                                                        "section_id": {
-                                                                            "type": "integer",
-                                                                            "example": 2
+                                                                            "example": 100
                                                                         },
                                                                         "title": {
                                                                             "type": "string",
-                                                                            "example": "Elemento A1"
+                                                                            "example": "Introducción"
                                                                         },
-                                                                        "url": {
-                                                                            "type": "string",
-                                                                            "format": "url",
-                                                                            "example": "https://www.youtube.com/watch?v=PGQxIILBb7M"
-                                                                        },
-                                                                        "position": {
-                                                                            "type": "integer",
-                                                                            "example": 0
-                                                                        },
-                                                                        "type": {
-                                                                            "type": "integer",
-                                                                            "example": 1
-                                                                        },
-                                                                        "created_at": {
-                                                                            "type": "string",
-                                                                            "format": "date-time",
-                                                                            "example": "2025-07-20T16:20:58.000000Z"
-                                                                        },
-                                                                        "updated_at": {
-                                                                            "type": "string",
-                                                                            "format": "date-time",
-                                                                            "example": "2025-07-20T16:20:58.000000Z"
-                                                                        },
-                                                                        "status_progress": {
-                                                                            "type": "boolean",
-                                                                            "example": false
-                                                                        },
-                                                                        "unlock": {
-                                                                            "type": "boolean",
-                                                                            "example": false
+                                                                        "elements": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "properties": {
+                                                                                    "id": {
+                                                                                        "type": "integer",
+                                                                                        "example": 1000
+                                                                                    },
+                                                                                    "title": {
+                                                                                        "type": "string",
+                                                                                        "example": "Video 1"
+                                                                                    },
+                                                                                    "questions": {
+                                                                                        "type": "array",
+                                                                                        "items": {
+                                                                                            "properties": {
+                                                                                                "id": {
+                                                                                                    "type": "integer",
+                                                                                                    "example": 2000
+                                                                                                },
+                                                                                                "text": {
+                                                                                                    "type": "string",
+                                                                                                    "example": "¿Qué es Laravel?"
+                                                                                                },
+                                                                                                "options": {
+                                                                                                    "type": "array",
+                                                                                                    "items": {
+                                                                                                        "properties": {
+                                                                                                            "id": {
+                                                                                                                "type": "integer",
+                                                                                                                "example": 3000
+                                                                                                            },
+                                                                                                            "text": {
+                                                                                                                "type": "string",
+                                                                                                                "example": "Framework de PHP"
+                                                                                                            }
+                                                                                                        },
+                                                                                                        "type": "object"
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "type": "object"
+                                                                                        }
+                                                                                    }
+                                                                                },
+                                                                                "type": "object"
+                                                                            }
                                                                         }
                                                                     },
                                                                     "type": "object"
@@ -541,6 +524,19 @@
                                         }
                                     },
                                     "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Certificación no encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "message": "No query results for model [App\\\\Models\\\\Certification] 999"
                                 }
                             }
                         }
@@ -3560,6 +3556,10 @@
         {
             "name": "Certifications",
             "description": "Certifications"
+        },
+        {
+            "name": "certifications",
+            "description": "certifications"
         },
         {
             "name": "Courses",

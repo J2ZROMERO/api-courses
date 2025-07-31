@@ -133,92 +133,97 @@ class CertificationController extends Controller
     /**
      * @OA\Get(
      *     path="/api/certifications/{id}",
-     *     summary="Obtener detalles de la certificación con cursos, secciones y elementos",
-     *     tags={"Certifications"},
+     *     summary="Obtener detalles de una certificación con sus cursos",
+     *     description="Devuelve una certificación junto con sus cursos, secciones, elementos, preguntas y opciones.",
+     *     operationId="getCertificationDetails",
+     *     tags={"certifications"},
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
-     *         description="ID del certificación",
-     *         @OA\Schema(type="integer")
+     *         description="ID de la certificación",
+     *         @OA\Schema(type="integer", example=1)
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Detalles del certificación con con cursos, secciones y elementos",
+     *         description="Detalles de la certificación",
      *         @OA\JsonContent(
+     *             type="object",
      *             @OA\Property(property="message", type="string", example="Detalles del certificación"),
      *             @OA\Property(
      *                 property="data",
      *                 type="object",
-     *                 @OA\Property(property="id", type="integer", example=10),
-     *                 @OA\Property(property="title", type="string", example="Introduccion"),
-     *                 @OA\Property(property="description", type="string", example="Texto largo de descripción..."),
-     *                 @OA\Property(property="created_by", type="integer", example=3),
-     *                 @OA\Property(property="created_at", type="string", format="date-time", example="2025-07-20T16:20:58.000000Z"),
-     *                 @OA\Property(property="updated_at", type="string", format="date-time", example="2025-07-20T16:20:58.000000Z"),
-     *                 
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="title", type="string", example="Certificación Full Stack"),
+     *                 @OA\Property(property="description", type="string", example="Incluye cursos de backend y frontend"),
      *                 @OA\Property(
-     *                     property="sections",
+     *                     property="courses",
      *                     type="array",
      *                     @OA\Items(
      *                         type="object",
-     *                         @OA\Property(property="id", type="integer", example=2),
-     *                         @OA\Property(property="course_id", type="integer", example=10),
-     *                         @OA\Property(property="title", type="string", example="certificación 1 Seccion 1"),
-     *                         @OA\Property(property="position", type="integer", example=0),
-     *                         @OA\Property(property="created_at", type="string", format="date-time", example="2025-07-20T16:20:58.000000Z"),
-     *                         @OA\Property(property="updated_at", type="string", format="date-time", example="2025-07-20T16:20:58.000000Z"),
-     *                         
+     *                         @OA\Property(property="id", type="integer", example=10),
+     *                         @OA\Property(property="title", type="string", example="Curso Laravel"),
      *                         @OA\Property(
-     *                             property="elements",
+     *                             property="sections",
      *                             type="array",
      *                             @OA\Items(
      *                                 type="object",
-     *                                 @OA\Property(property="id", type="integer", example=2),
-     *                                 @OA\Property(property="section_id", type="integer", example=2),
-     *                                 @OA\Property(property="title", type="string", example="Elemento A1"),
-     *                                 @OA\Property(property="url", type="string", format="url", example="https://www.youtube.com/watch?v=PGQxIILBb7M"),
-     *                                 @OA\Property(property="position", type="integer", example=0),
-     *                                 @OA\Property(property="type", type="integer", example=1),
-     *                                 @OA\Property(property="created_at", type="string", format="date-time", example="2025-07-20T16:20:58.000000Z"),
-     *                                 @OA\Property(property="updated_at", type="string", format="date-time", example="2025-07-20T16:20:58.000000Z"),
-     *                                 @OA\Property(property="status_progress", type="boolean", example=false),
-     *                                 @OA\Property(property="unlock", type="boolean", example=false)
-     *                             ),
-     *                              @OA\Items(
-     *                                 type="object",
-     *                                 @OA\Property(property="id", type="integer", example=3),
-     *                                 @OA\Property(property="section_id", type="integer", example=2),
-     *                                 @OA\Property(property="title", type="string", example="Elemento A2"),
-     *                                 @OA\Property(property="url", type="string", format="url", example="https://www.youtube.com/watch?v=PGQxIILBb7M"),
-     *                                 @OA\Property(property="position", type="integer", example=0),
-     *                                 @OA\Property(property="type", type="integer", example=1),
-     *                                 @OA\Property(property="created_at", type="string", format="date-time", example="2025-07-20T16:20:58.000000Z"),
-     *                                 @OA\Property(property="updated_at", type="string", format="date-time", example="2025-07-20T16:20:58.000000Z"),
-     *                                 @OA\Property(property="status_progress", type="boolean", example=false),
-     *                                 @OA\Property(property="unlock", type="boolean", example=false)
+     *                                 @OA\Property(property="id", type="integer", example=100),
+     *                                 @OA\Property(property="title", type="string", example="Introducción"),
+     *                                 @OA\Property(
+     *                                     property="elements",
+     *                                     type="array",
+     *                                     @OA\Items(
+     *                                         type="object",
+     *                                         @OA\Property(property="id", type="integer", example=1000),
+     *                                         @OA\Property(property="title", type="string", example="Video 1"),
+     *                                         @OA\Property(
+     *                                             property="questions",
+     *                                             type="array",
+     *                                             @OA\Items(
+     *                                                 type="object",
+     *                                                 @OA\Property(property="id", type="integer", example=2000),
+     *                                                 @OA\Property(property="text", type="string", example="¿Qué es Laravel?"),
+     *                                                 @OA\Property(
+     *                                                     property="options",
+     *                                                     type="array",
+     *                                                     @OA\Items(
+     *                                                         type="object",
+     *                                                         @OA\Property(property="id", type="integer", example=3000),
+     *                                                         @OA\Property(property="text", type="string", example="Framework de PHP")
+     *                                                     )
+     *                                                 )
+     *                                             )
+     *                                         )
+     *                                     )
+     *                                 )
      *                             )
      *                         )
      *                     )
      *                 )
      *             )
      *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Certificación no encontrada",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             example={
+     *                 "message": "No query results for model [App\\Models\\Certification] 999"
+     *             }
+     *         )
      *     )
      * )
      */
     public function show($id)
     {
-        $certification = Certification::all();
-        // with([
-        //     'sections' => function ($query) {
-        //         $query->orderBy('position');
-        //     },
-        //     'sections.elements' => function ($query) {
-        //         $query->orderBy('position');
-        //     },
-        //     'sections.elements.questions.options'
-        // ])->findOrFail($id);
+        $certification = Certification::with([
+            'courses.sections' => fn($q) => $q->orderBy('position'),
+            'courses.sections.elements' => fn($q) => $q->orderBy('position'),
+            'courses.sections.elements.questions.options'
+        ])->findOrFail($id);
         return response()->json([
             'message' => 'Detalles del certificación',
             'data'    => $certification,
