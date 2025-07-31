@@ -21,4 +21,10 @@ class Certification extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'certification_course')
+                    ->withTimestamps(); 
+    }
 }

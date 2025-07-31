@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{id}', [CertificationController::class, 'show']);
         Route::put('/{id}', [CertificationController::class, 'update']);
         Route::delete('/{id}', [CertificationController::class, 'destroy']);
+        Route::post('/{id}/assign-courses', [CertificationController::class, 'assignCourses']);
     });
 
     Route::prefix('sections')->group(function () {
@@ -55,7 +56,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{id}', [UserController::class, 'show']);
         Route::put('/{id}', [UserController::class, 'update']);
         Route::delete('/{id}', [UserController::class, 'destroy']);
-    });
+    });{certification}
 
     Route::prefix('options')->group(function () {
         Route::get('/', [OptionController::class, 'index']);

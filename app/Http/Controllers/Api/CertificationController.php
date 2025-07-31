@@ -335,12 +335,16 @@ class CertificationController extends Controller
      *     )
      * )
      */
-    public function signInToCourse(SignInToCourseRequest $request)
+    public function assignCourses(Request $request, Certification $certification)
     {
-        $user = User::findOrFail($request->user_id);
-        $user->signIncertifications()->sync($request->course_ids);
+        $validated = $request->validate([
+            'course_ids' => 'required|array',
+            'course_ids.*' => 'exists:courses,id',
+        ]);
+
+        $certification->courses()->sync($validated['course_ids']);
         return response()->json([
-            'message' => 'Se ha registrado en certificación'
+            'message' => 'Cursos asignados correctamente.'
         ], 201);
     }
 

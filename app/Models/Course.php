@@ -32,6 +32,12 @@ class Course extends Model
         return $this->hasMany(Section::class);
     }
 
+    public function certifications()
+    {
+        return $this->belongsToMany(Certification::class, 'certification_course')
+        ->withTimestamps();
+    }
+
     public function scopeUserIs($query, $user)
     {
         if (is_null($user)) {

@@ -344,13 +344,4 @@ class CourseController extends Controller
             'message' => 'Se ha registrado en curso'
         ], 201);
     }
-
-    // public function infoCourse(Request $request, $id)
-    // {
-    //     $user = User::findOrFail($request->user_id);
-    //     $user->signInCourses()->sync($request->course_ids);
-    //     return response()->json([
-    //         'message' => 'Se ha registrado en curso'
-    //     ], 201);
-    // }
 }
