@@ -169,7 +169,11 @@ class SectionController extends Controller
      */
     public function show($id)
     {
-        $section = Section::findOrFail($id);
+        $section = Section::with([
+            'subsections' => fn($q) => $q->orderBy('position'),
+            'subsections.elements' => fn($q) => $q->orderBy('position'),
+            'subsections.elements.questions.options'
+        ])->findOrFail($id);
         return response()->json([
             'message' => 'Detalles de la sección',
             'data'    => $section,

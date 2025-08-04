@@ -212,13 +212,10 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = Course::with([
-            'sections' => function ($query) {
-                $query->orderBy('position');
-            },
-            'sections.elements' => function ($query) {
-                $query->orderBy('position');
-            },
-            'sections.elements.questions.options'
+            'sections' => fn($q) => $q->orderBy('position'),
+            'sections.subsections' => fn($q) => $q->orderBy('position'),
+            'sections.subsections.elements' => fn($q) => $q->orderBy('position'),
+            'sections.subsections.elements.questions.options'
         ])->findOrFail($id);
         return response()->json([
             'message' => 'Detalles del curso',
