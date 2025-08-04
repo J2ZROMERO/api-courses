@@ -22,9 +22,9 @@ class Section extends Model
         return $this->belongsTo(Course::class);
     }
 
-    public function elements()
+    public function subsections()
     {
-        return $this->hasMany(Element::class);
+        return $this->hasMany(Subsection::class);
     }
 
     public function scopeCourseIs($query, $course)

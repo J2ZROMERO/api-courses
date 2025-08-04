@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('elements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('section_id')->constrained('sections')->cascadeOnDelete();
+            $table->foreignId('subsection_id')->constrained('subsections')->cascadeOnDelete();
             $table->string('title');
             $table->string('url');
             $table->integer('position')->default(0);

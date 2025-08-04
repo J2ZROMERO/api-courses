@@ -14,7 +14,7 @@ class Element extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'section_id',
+        'subsection_id',
         'title',
         'position',
         'type',
@@ -23,9 +23,9 @@ class Element extends Model
 
     protected $appends = ['status_progress', 'unlock'];
 
-    public function section()
+    public function subsection()
     {
-        return $this->belongsTo(Section::class);
+        return $this->belongsTo(Subsection::class);
     }
 
     public function elementProgress()
@@ -38,13 +38,13 @@ class Element extends Model
         return $this->hasMany(Question::class);
     }
 
-    public function scopeSectionIs($query, $section)
+    public function scopeSubsectionIs($query, $section)
     {
         if (is_null($section)) {
             return $query;
         }
 
-        return $query->where('section_id', $section);
+        return $query->where('subsection_id', $section);
     }
 
     public function getStatusProgressAttribute()

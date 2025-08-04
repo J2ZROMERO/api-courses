@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ElementController;
 use App\Http\Controllers\Api\OptionController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\SectionController;
+use App\Http\Controllers\Api\SubsectionController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,14 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{id}', [SectionController::class, 'show']);
         Route::put('/{id}', [SectionController::class, 'update']);
         Route::delete('/{id}', [SectionController::class, 'destroy']);
+    });
+
+    Route::prefix('subsections')->group(function () {
+        Route::get('/', [SubsectionController::class, 'index']);
+        Route::post('/', [SubsectionController::class, 'store']);
+        Route::get('/{id}', [SubsectionController::class, 'show']);
+        Route::put('/{id}', [SubsectionController::class, 'update']);
+        Route::delete('/{id}', [SubsectionController::class, 'destroy']);
     });
 
     Route::prefix('elements')->group(function () {

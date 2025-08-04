@@ -3,34 +3,31 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ElementRequest;
-use App\Http\Requests\ProgressRequest;
-use App\Models\Element;
-use App\Models\ElementProgress;
+use App\Http\Requests\SubsectionRequest;
+use App\Models\Subsection;
 use Illuminate\Http\Request;
-use Laravel\Prompts\Progress;
 
-class ElementController extends Controller
+class SubsectionController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/elements",
-     *     summary="Listar elementos con paginación",
+     *     path="/api/subsections",
+     *     summary="Listar subsecciones con paginación",
      *     security={{"bearerAuth":{}}},
-     *     tags={"Elements"},
+     *     tags={"Subsections"},
      *     @OA\Parameter(
-     *         name="subsection",
+     *         name="course",
      *         in="query",
-     *         description="Filtrar elementos por ID de sección",
+     *         description="Filtrar subsecciones por ID de sección",
      *         required=false,
      *         @OA\Schema(type="integer", example=1)
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Listado de elementos paginadas",
+     *         description="Listado de subsecciones paginadas",
      *         @OA\JsonContent(
      *             type="object",
-     *             @OA\Property(property="message", type="string", example="Listado de elementos"),
+     *             @OA\Property(property="message", type="string", example="Listado de subsecciones"),
      *             @OA\Property(
      *                 property="data",
      *                 type="object",
@@ -41,19 +38,17 @@ class ElementController extends Controller
      *                     @OA\Items(
      *                         type="object",
      *                         @OA\Property(property="id", type="integer", example=1),
-     *                         @OA\Property(property="title", type="string", example="Curso de Laravel"),
-     *                         @OA\Property(property="url", type="string", example="https://github.com"),
+     *                         @OA\Property(property="title", type="string", example="sections de Laravel"),
      *                         @OA\Property(property="position", type="integer", example=0),
-     *                         @OA\Property(property="subsection", type="integer", example=1),
-     *                         @OA\Property(property="type", type="integer", example=1),
+     *                         @OA\Property(property="section_id", type="integer", example=1),
      *                         @OA\Property(property="created_at", type="string", format="date-time", example="2025-07-19T15:55:10.000000Z"),
      *                         @OA\Property(property="updated_at", type="string", format="date-time", example="2025-07-19T15:55:10.000000Z")
      *                     )
      *                 ),
-     *                 @OA\Property(property="first_page_url", type="string", example="http://localhost:8000/api/elements?page=1"),
+     *                 @OA\Property(property="first_page_url", type="string", example="http://localhost:8000/api/subsections?page=1"),
      *                 @OA\Property(property="from", type="integer", nullable=true, example=null),
      *                 @OA\Property(property="last_page", type="integer", example=1),
-     *                 @OA\Property(property="last_page_url", type="string", example="http://localhost:8000/api/elements?page=1"),
+     *                 @OA\Property(property="last_page_url", type="string", example="http://localhost:8000/api/subsections?page=1"),
      *                 @OA\Property(
      *                     property="links",
      *                     type="array",
@@ -65,7 +60,7 @@ class ElementController extends Controller
      *                     )
      *                 ),
      *                 @OA\Property(property="next_page_url", type="string", nullable=true, example=null),
-     *                 @OA\Property(property="path", type="string", example="http://localhost:8000/api/elements"),
+     *                 @OA\Property(property="path", type="string", example="http://localhost:8000/api/subsections"),
      *                 @OA\Property(property="per_page", type="integer", example=15),
      *                 @OA\Property(property="prev_page_url", type="string", nullable=true, example=null),
      *                 @OA\Property(property="to", type="integer", nullable=true, example=null),
@@ -77,28 +72,26 @@ class ElementController extends Controller
      */
     public function index(Request $request)
     {
-        $elements = Element::subsectionIs(request('subsection'))->paginate();
+        $subsections = Subsection::sectionIs(request('section'))->paginate();
         return response()->json([
-            'message' => 'Listado de elementos',
-            'data'    => $elements,
+            'message' => 'Listado de subsecciones',
+            'data'    => $subsections,
         ], 200);
     }
 
     /**
      * @OA\Post(
-     *     path="/api/elements",
-     *     summary="Crear nuevo elemento",
+     *     path="/api/subsections",
+     *     summary="Crear nueva seccion",
      *     security={{"bearerAuth":{}}},
-     *     tags={"Elements"},
+     *     tags={"Subsections"},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"title", "position", "subsection_id","type"},
-     *             @OA\Property(property="title", type="string", example="elemento de Laravel"),
-     *             @OA\Property(property="url", type="string", example="https://github.com"),
+     *             required={"title", "position", "section_id"},
+     *             @OA\Property(property="title", type="string", example="seccion de Laravel"),
      *             @OA\Property(property="position", type="integer", example=0),
-     *             @OA\Property(property="subsection_id", type="integer", example=1),
-     *             @OA\Property(property="type", type="integer", example=1),
+     *             @OA\Property(property="section_id", type="integer", example=1),
      *         )
      *     ),
      *     @OA\Response(
@@ -108,14 +101,10 @@ class ElementController extends Controller
      *             type="object",
      *             @OA\Property(property="id", type="integer", example=1),
      *             @OA\Property(property="title", type="string", example="Seccion de Laravel"),
-     *             @OA\Property(property="url", type="string", example="https://github.com"),
-     *             @OA\Property(property="type", type="integer", example=1),
      *             @OA\Property(property="position", type="string", example=0),
-     *             @OA\Property(property="subsection_id", type="integer", example=1),
+     *             @OA\Property(property="section_id", type="integer", example=1),
      *             @OA\Property(property="created_at", type="string", format="date-time", example="2025-07-19T15:55:10.000000Z"),
-     *             @OA\Property(property="updated_at", type="string", format="date-time", example="2025-07-19T15:55:10.000000Z"),
-     *             @OA\Property(property="status_progress", type="boolean", example=false),
-     *             @OA\Property(property="unlock", type="boolean", example=false)
+     *             @OA\Property(property="updated_at", type="string", format="date-time", example="2025-07-19T15:55:10.000000Z")
      *         ),
      *     ),
      *     @OA\Response(
@@ -132,8 +121,8 @@ class ElementController extends Controller
      *                     "position": {
      *                         "The position column must be an integer."
      *                     },
-     *                      "seccion_id": {
-     *                         "The seccion doesnt exist."
+     *                      "section_id": {
+     *                         "The course doesnt exist."
      *                     }
      *                 }
      *             }
@@ -141,20 +130,20 @@ class ElementController extends Controller
      *     )
      * )
      */
-    public function store(ElementRequest $request)
+    public function store(SubsectionRequest $request)
     {
-        $element = Element::create($request->all());
+        $subsection = Subsection::create($request->all());
         return response()->json([
-            'message' => 'Elemento Creado',
-            'data'    => $element,
+            'message' => 'Listado de sectionss',
+            'data'    => $subsection,
         ], 200);
     }
 
     /**
      * @OA\Get(
-     *     path="/api/elements/{id}",
+     *     path="/api/subsections/{id}",
      *     summary="Mostrar una seccion por ID",
-     *     tags={"Elements"},
+     *     tags={"subsections"},
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
@@ -169,33 +158,29 @@ class ElementController extends Controller
      *             type="object",
      *             @OA\Property(property="id", type="integer", example=1),
      *             @OA\Property(property="title", type="string", example="Seccion de Laravel"),
-     *             @OA\Property(property="url", type="string", example="https://github.com"),
-     *             @OA\Property(property="type", type="integer", example=1),
      *             @OA\Property(property="position", type="string", example=0),
-     *             @OA\Property(property="subsection_id", type="integer", example=1),
+     *             @OA\Property(property="section_id", type="integer", example=1),
      *             @OA\Property(property="created_at", type="string", format="date-time", example="2025-07-19T15:55:10.000000Z"),
-     *             @OA\Property(property="updated_at", type="string", format="date-time", example="2025-07-19T15:55:10.000000Z"),
-     *             @OA\Property(property="status_progress", type="boolean", example=false),
-     *             @OA\Property(property="unlock", type="boolean", example=false)
+     *             @OA\Property(property="updated_at", type="string", format="date-time", example="2025-07-19T15:55:10.000000Z")
      *         ),
      *     ),
-     *     @OA\Response(response=404, description="Curso no encontrado")
+     *     @OA\Response(response=404, description="sections no encontrado")
      * )
      */
     public function show($id)
     {
-        $element = Element::findOrFail($id);
+        $subsection = Subsection::findOrFail($id);
         return response()->json([
-            'message' => 'Detalles del elemento',
-            'data'    => $element,
+            'message' => 'Detalles de la sección',
+            'data'    => $subsection,
         ], 200);
     }
 
     /**
      * @OA\Put(
-     *     path="/api/elements/{id}",
+     *     path="/api/subsections/{id}",
      *     summary="Actualizar una sección",
-     *     tags={"Elements"},
+     *     tags={"subsections"},
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
@@ -206,11 +191,8 @@ class ElementController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             @OA\Property(property="title", type="string", example="Elemento actualizado"),
-     *             @OA\Property(property="position", type="integer", example=0),
-     *             @OA\Property(property="url", type="string", example="https://github.com"),
-     *             @OA\Property(property="type", type="integer", example=1),
-     *             @OA\Property(property="subsection_id", type="integer", example=1),
+     *             @OA\Property(property="title", type="string", example="Seccion actualizado"),
+     *             @OA\Property(property="position", type="integer", example=0)
      *         )
      *     ),
      *     @OA\Response(
@@ -220,31 +202,29 @@ class ElementController extends Controller
      *             type="object",
      *             @OA\Property(property="id", type="integer", example=1),
      *             @OA\Property(property="title", type="string", example="Seccion de Laravel"),
-     *              @OA\Property(property="url", type="string", example="https://github.com"),
-     *             @OA\Property(property="type", type="integer", example=1),
      *             @OA\Property(property="position", type="string", example=0),
-     *             @OA\Property(property="subsection_id", type="integer", example=1),
+     *             @OA\Property(property="section_id", type="integer", example=1),
      *             @OA\Property(property="created_at", type="string", format="date-time", example="2025-07-19T15:55:10.000000Z"),
      *             @OA\Property(property="updated_at", type="string", format="date-time", example="2025-07-19T15:55:10.000000Z")
      *         ),
      *     )
      * )
      */
-    public function update(ElementRequest $request, $id)
+    public function update(SubsectionRequest $request, $id)
     {
-        $element = Element::findOrFail($id);
-        $element->update($request->all());
+        $subsection = Subsection::findOrFail($id);
+        $subsection->update($request->all());
         return response()->json([
-            'message' => 'Elemento actualizado',
-            'data'    => $element,
+            'message' => 'Subsección actualizado',
+            'data'    => $subsection,
         ], 200);
     }
 
     /**
      * @OA\Delete(
-     *     path="/api/elements/{id}",
-     *     summary="Eliminar un elemento",
-     *     tags={"Elements"},
+     *     path="/api/subsections/{id}",
+     *     summary="Eliminar una sección",
+     *     tags={"subsections"},
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
@@ -252,64 +232,15 @@ class ElementController extends Controller
      *         required=true,
      *         @OA\Schema(type="integer")
      *     ),
-     *     @OA\Response(response=204, description="Elemento eliminado")
+     *     @OA\Response(response=204, description="Sección eliminado")
      * )
      */
     public function destroy($id)
     {
-        $element = Element::findOrFail($id);
-        $element->delete();
+        $subsection = Subsection::findOrFail($id);
+        $subsection->delete();
         return response()->json([
-            'message' => 'Elemento eliminado'
+            'message' => 'Subsección eliminado'
         ], 204);
-    }
-
-    /**
-     * @OA\Post(
-     *     path="/api/elements/progress",
-     *     summary="Marcar como visto",
-     *     security={{"bearerAuth":{}}},
-     *     tags={"Elements"},
-     *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *             required={"user_id", "element_id"},
-     *             @OA\Property(property="element_id", type="integer", example=1),
-     *             @OA\Property(property="user_id", type="integer", example=1),
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=201,
-     *         description="Se ha registrado en un curso"
-     *     ),
-     *     @OA\Response(
-     *         response=422,
-     *         description="Errores de validación",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             example={
-     *                 "message": "The given data was invalid.",
-     *                 "errors": {
-     *                     "title": {
-     *                         "The title field is required."
-     *                     },
-     *                     "description": {
-     *                         "The description must be at least 10 characters."
-     *                     },
-     *                      "created_by": {
-     *                         "The user doesnt exist."
-     *                     }
-     *                 }
-     *             }
-     *         )
-     *     )
-     * )
-     */
-    public function progress(ProgressRequest $request)
-    {
-        ElementProgress::create($request->all());
-        return response()->json([
-            'message' => 'Se ha guardado el progreso'
-        ], 201);
     }
 }

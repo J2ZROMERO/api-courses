@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ElementRequest extends FormRequest
+class SubsectionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,9 @@ class ElementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "subsection_id" => "required|exists:subsections,id",
+            "section_id" => "required|exists:sections,id",
             "position" => "integer|required",
             "title" => "string|required",
-            "type" => "integer|required",
-            "url" => "string|nullable",
         ];
     }
 }

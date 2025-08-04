@@ -1269,7 +1269,7 @@
                 "operationId": "c177f3ebafb102c0851b4a065cdd9d2a",
                 "parameters": [
                     {
-                        "name": "section",
+                        "name": "subsection",
                         "in": "query",
                         "description": "Filtrar elementos por ID de sección",
                         "required": false,
@@ -1316,7 +1316,7 @@
                                                                 "type": "integer",
                                                                 "example": 0
                                                             },
-                                                            "seccion_id": {
+                                                            "subsection": {
                                                                 "type": "integer",
                                                                 "example": 1
                                                             },
@@ -1433,7 +1433,7 @@
                                 "required": [
                                     "title",
                                     "position",
-                                    "section_id",
+                                    "subsection_id",
                                     "type"
                                 ],
                                 "properties": {
@@ -1449,7 +1449,7 @@
                                         "type": "integer",
                                         "example": 0
                                     },
-                                    "section_id": {
+                                    "subsection_id": {
                                         "type": "integer",
                                         "example": 1
                                     },
@@ -1490,7 +1490,7 @@
                                             "type": "string",
                                             "example": 0
                                         },
-                                        "section_id": {
+                                        "subsection_id": {
                                             "type": "integer",
                                             "example": 1
                                         },
@@ -1594,7 +1594,7 @@
                                             "type": "string",
                                             "example": 0
                                         },
-                                        "section_id": {
+                                        "subsection_id": {
                                             "type": "integer",
                                             "example": 1
                                         },
@@ -1670,7 +1670,7 @@
                                         "type": "integer",
                                         "example": 1
                                     },
-                                    "section_id": {
+                                    "subsection_id": {
                                         "type": "integer",
                                         "example": 1
                                     }
@@ -1707,7 +1707,7 @@
                                             "type": "string",
                                             "example": 0
                                         },
-                                        "section_id": {
+                                        "subsection_id": {
                                             "type": "integer",
                                             "example": 1
                                         },
@@ -3087,6 +3087,439 @@
                 ]
             }
         },
+        "/api/subsections": {
+            "get": {
+                "tags": [
+                    "Subsections"
+                ],
+                "summary": "Listar subsecciones con paginación",
+                "operationId": "8e2372d12e3502455c160b2145f270d4",
+                "parameters": [
+                    {
+                        "name": "course",
+                        "in": "query",
+                        "description": "Filtrar subsecciones por ID de sección",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Listado de subsecciones paginadas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Listado de subsecciones"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "title": {
+                                                                "type": "string",
+                                                                "example": "sections de Laravel"
+                                                            },
+                                                            "position": {
+                                                                "type": "integer",
+                                                                "example": 0
+                                                            },
+                                                            "section_id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2025-07-19T15:55:10.000000Z"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": "2025-07-19T15:55:10.000000Z"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "first_page_url": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8000/api/subsections?page=1"
+                                                },
+                                                "from": {
+                                                    "type": "integer",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "last_page": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "last_page_url": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8000/api/subsections?page=1"
+                                                },
+                                                "links": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "url": {
+                                                                "type": "string",
+                                                                "example": null,
+                                                                "nullable": true
+                                                            },
+                                                            "label": {
+                                                                "type": "string",
+                                                                "example": "&laquo; Previous"
+                                                            },
+                                                            "active": {
+                                                                "type": "boolean",
+                                                                "example": false
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "next_page_url": {
+                                                    "type": "string",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "path": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8000/api/subsections"
+                                                },
+                                                "per_page": {
+                                                    "type": "integer",
+                                                    "example": 15
+                                                },
+                                                "prev_page_url": {
+                                                    "type": "string",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "to": {
+                                                    "type": "integer",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "total": {
+                                                    "type": "integer",
+                                                    "example": 0
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Subsections"
+                ],
+                "summary": "Crear nueva seccion",
+                "operationId": "68265980970043fc1a5ce2c746fbe524",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "position",
+                                    "section_id"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "seccion de Laravel"
+                                    },
+                                    "position": {
+                                        "type": "integer",
+                                        "example": 0
+                                    },
+                                    "section_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Seccion creado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Seccion de Laravel"
+                                        },
+                                        "position": {
+                                            "type": "string",
+                                            "example": 0
+                                        },
+                                        "section_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-19T15:55:10.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-19T15:55:10.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Errores de validación",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "message": "The given data was invalid.",
+                                    "errors": {
+                                        "title": [
+                                            "The title field is required."
+                                        ],
+                                        "position": [
+                                            "The position column must be an integer."
+                                        ],
+                                        "section_id": [
+                                            "The course doesnt exist."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/subsections/{id}": {
+            "get": {
+                "tags": [
+                    "subsections"
+                ],
+                "summary": "Mostrar una seccion por ID",
+                "operationId": "3d63325c5e20827e7c000bcd541afced",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalles de la sección",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Seccion de Laravel"
+                                        },
+                                        "position": {
+                                            "type": "string",
+                                            "example": 0
+                                        },
+                                        "section_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-19T15:55:10.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-19T15:55:10.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "sections no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "subsections"
+                ],
+                "summary": "Actualizar una sección",
+                "operationId": "8348ad6834589a8c9a126b9534a5d7fe",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Seccion actualizado"
+                                    },
+                                    "position": {
+                                        "type": "integer",
+                                        "example": 0
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Seccion actualizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Seccion de Laravel"
+                                        },
+                                        "position": {
+                                            "type": "string",
+                                            "example": 0
+                                        },
+                                        "section_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-19T15:55:10.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-19T15:55:10.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "subsections"
+                ],
+                "summary": "Eliminar una sección",
+                "operationId": "ddb1c338a21e1733194f3a9a0b152662",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Sección eliminado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/users": {
             "get": {
                 "tags": [
@@ -3580,6 +4013,14 @@
         {
             "name": "Sections",
             "description": "Sections"
+        },
+        {
+            "name": "Subsections",
+            "description": "Subsections"
+        },
+        {
+            "name": "subsections",
+            "description": "subsections"
         },
         {
             "name": "Users",
