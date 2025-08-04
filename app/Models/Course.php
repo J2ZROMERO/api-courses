@@ -46,4 +46,32 @@ class Course extends Model
 
         return $query->where('created_by', $user);
     }
+
+    public function getProgressPercentage()
+    {
+        // Cargar relaciones si no están cargadas
+        if (!$this->relationLoaded('sections')) {
+            $this->load([
+                'sections.subsections.elements.elementProgress'
+            ]);
+        }
+
+        $totalElements = 0;
+        $completedElements = 0;
+
+        foreach ($this->sections as $section) {
+            foreach ($section->subsections as $subsection) {
+                foreach ($subsection->elements as $element) {
+                    $totalElements++;
+                    if ($element->elementProgress) {
+                        $completedElements++;
+                    }
+                }
+            }
+        }
+
+        return $totalElements > 0
+            ? round(($completedElements / $totalElements) * 100, 2)
+            : 0;
+    }
 }

@@ -976,6 +976,10 @@
                                             "type": "string",
                                             "example": "Detalles del curso"
                                         },
+                                        "progress": {
+                                            "type": "integer",
+                                            "example": 10
+                                        },
                                         "data": {
                                             "properties": {
                                                 "id": {

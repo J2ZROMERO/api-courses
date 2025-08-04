@@ -30,7 +30,7 @@ class Element extends Model
 
     public function elementProgress()
     {
-        return $this->hasOne(ElementProgress::class);
+        return $this->hasOne(ElementProgress::class)->where('user_id', auth()->id());
     }
 
     public function questions()

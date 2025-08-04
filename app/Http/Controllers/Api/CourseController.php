@@ -150,6 +150,7 @@ class CourseController extends Controller
      *         description="Detalles del curso con secciones y elementos",
      *         @OA\JsonContent(
      *             @OA\Property(property="message", type="string", example="Detalles del curso"),
+     *             @OA\Property(property="progress", type="integer", example=10),
      *             @OA\Property(
      *                 property="data",
      *                 type="object",
@@ -217,8 +218,10 @@ class CourseController extends Controller
             'sections.subsections.elements' => fn($q) => $q->orderBy('position'),
             'sections.subsections.elements.questions.options'
         ])->findOrFail($id);
+        $progress = $course->getProgressPercentage();
         return response()->json([
             'message' => 'Detalles del curso',
+            'progress' => $progress,
             'data'    => $course,
         ], 200);
     }
