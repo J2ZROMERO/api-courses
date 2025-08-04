@@ -397,7 +397,7 @@
         "/api/certifications/{id}": {
             "get": {
                 "tags": [
-                    "certifications"
+                    "Certifications"
                 ],
                 "summary": "Obtener detalles de una certificación con sus cursos",
                 "description": "Devuelve una certificación junto con sus cursos, secciones, elementos, preguntas y opciones.",
@@ -3989,10 +3989,6 @@
         {
             "name": "Certifications",
             "description": "Certifications"
-        },
-        {
-            "name": "certifications",
-            "description": "certifications"
         },
         {
             "name": "Courses",

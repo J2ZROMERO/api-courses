@@ -136,7 +136,7 @@ class CertificationController extends Controller
      *     summary="Obtener detalles de una certificación con sus cursos",
      *     description="Devuelve una certificación junto con sus cursos, secciones, elementos, preguntas y opciones.",
      *     operationId="getCertificationDetails",
-     *     tags={"certifications"},
+     *     tags={"Certifications"},
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
@@ -221,8 +221,9 @@ class CertificationController extends Controller
     {
         $certification = Certification::with([
             'courses.sections' => fn($q) => $q->orderBy('position'),
-            'courses.sections.elements' => fn($q) => $q->orderBy('position'),
-            'courses.sections.elements.questions.options'
+            'courses.sections.subsections' => fn($q) => $q->orderBy('position'),
+            'courses.sections.subsections.elements' => fn($q) => $q->orderBy('position'),
+            'courses.sections.subsections.elements.questions.options'
         ])->findOrFail($id);
         return response()->json([
             'message' => 'Detalles del certificación',
