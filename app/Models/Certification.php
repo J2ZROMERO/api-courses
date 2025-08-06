@@ -28,12 +28,15 @@ class Certification extends Model
                     ->withTimestamps(); 
     }
 
-    public function scopeUserIs($query, $user)
+    public function scopeUserIs($query, $userId = null)
     {
-        if (is_null($user)) {
-            return $query;
+        // If not provided, default to the authenticated user
+        $userId = $userId ?? auth()->id();
+
+        if ($userId) {
+            $query->where('user_id', $userId);
         }
 
-        return $query->where('user_id', $user);
+        return $query;
     }
 }
