@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{id}', [CourseController::class, 'destroy']);
     });
     
-    Route::post('/sign-to-course', [CourseController::class, 'signInToCourse']);
+Route::post('/certifications/{certification}/assign-courses', [CertificationController::class, 'assignCourses']);
 
     Route::prefix('certifications')->group(function () {
         Route::get('/', [CertificationController::class, 'index']);
