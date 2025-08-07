@@ -15,7 +15,7 @@ echo "➤ Creating session table (if needed)..."
 php artisan session:table || echo "Session table already exists or skipped"
 
 echo "➤ Running migrations..."
-until php artisan migrate:fresh --force; do
+until php artisan migrate --force; do
   echo "⚠️ Waiting for the database to be ready..."
   sleep 3
 done
