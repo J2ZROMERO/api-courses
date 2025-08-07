@@ -352,13 +352,14 @@ class CertificationController extends Controller
      *     )
      * )
      */
-    public function assignCourses(Request $request, Certification $certification)
+    public function assignCourses(Request $request, $id)
     {
         $validated = $request->validate([
             'course_ids' => 'required|array',
             'course_ids.*' => 'exists:courses,id',
         ]);
 
+        $certification = Certification::findOrFail($id);
         $certification->courses()->sync($validated['course_ids']);
         return response()->json([
             'message' => 'Cursos asignados correctamente.'
