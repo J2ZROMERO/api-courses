@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     
     Route::post('/sign-to-course', [CourseController::class, 'signInToCourse']);
+    Route::post('/sign-to-certification', [CertificationController::class, 'signInToCertification']);
 
     Route::prefix('certifications')->group(function () {
         Route::get('/', [CertificationController::class, 'index']);

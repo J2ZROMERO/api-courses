@@ -28,6 +28,12 @@ class Certification extends Model
                     ->withTimestamps(); 
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'certification_user')->withTimestamps();
+    }
+
+
     public function scopeUserIs($query, $userId = null)
     {
         // If not provided, default to the authenticated user

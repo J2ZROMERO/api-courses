@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CertificationRequest;
+use App\Http\Requests\SignInToCertificationRequest;
 use App\Models\Certification;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CertificationController extends Controller
@@ -360,6 +362,65 @@ class CertificationController extends Controller
         $certification->courses()->sync($validated['course_ids']);
         return response()->json([
             'message' => 'Cursos asignados correctamente.'
+        ], 201);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/sign-to-certification",
+     *     summary="Registrarse a Certificación",
+     *     security={{"bearerAuth":{}}},
+     *     tags={"Certifications"},
+     *     @OA\RequestBody(
+     *           required=true,
+     *           @OA\JsonContent(
+     *               required={"user_id", "certification_ids"},
+     *               @OA\Property(
+     *                   property="certification_ids",
+     *                   type="array",
+     *                   @OA\Items(type="integer"),       
+     *                   example={1, 2}                  
+     *               ),
+     *               @OA\Property(
+     *                   property="user_id",
+     *                   type="integer",
+     *                  example=1
+     *               )
+     *           )
+     *       ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Se ha registrado en una certificación"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Errores de validación",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             example={
+     *                 "message": "The given data was invalid.",
+     *                 "errors": {
+     *                     "title": {
+     *                         "The title field is required."
+     *                     },
+     *                     "description": {
+     *                         "The description must be at least 10 characters."
+     *                     },
+     *                      "created_by": {
+     *                         "The user doesnt exist."
+     *                     }
+     *                 }
+     *             }
+     *         )
+     *     )
+     * )
+     */
+    public function signInToCertification(SignInToCertificationRequest $request)
+    {
+        $user = User::findOrFail($request->user_id);
+        $user->certifications()->sync($request->certification_ids);
+        return response()->json([
+            'message' => 'Se ha registrado en certificaciones'
         ], 201);
     }
 

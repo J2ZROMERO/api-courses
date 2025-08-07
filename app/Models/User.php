@@ -57,6 +57,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Course::class)->withTimestamps();
     }
+    
+    public function certifications()
+    {
+        return $this->belongsToMany(Certification::class, 'certification_user')->withTimestamps();
+    }
 
     public function elementProgress()
     {
