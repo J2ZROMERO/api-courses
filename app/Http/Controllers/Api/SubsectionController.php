@@ -143,7 +143,7 @@ class SubsectionController extends Controller
      * @OA\Get(
      *     path="/api/subsections/{id}",
      *     summary="Mostrar una seccion por ID",
-     *     tags={"subsections"},
+     *     tags={"Subsections"},
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
@@ -180,7 +180,7 @@ class SubsectionController extends Controller
      * @OA\Put(
      *     path="/api/subsections/{id}",
      *     summary="Actualizar una sección",
-     *     tags={"subsections"},
+     *     tags={"Subsections"},
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
@@ -224,7 +224,7 @@ class SubsectionController extends Controller
      * @OA\Delete(
      *     path="/api/subsections/{id}",
      *     summary="Eliminar una sección",
-     *     tags={"subsections"},
+     *     tags={"Subsections"},
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",

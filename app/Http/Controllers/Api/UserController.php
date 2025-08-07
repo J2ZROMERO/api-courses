@@ -167,10 +167,12 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $courses = $user->signInCourses()->get();
+        $certifications = $user->certifications()->get();
         return response()->json([
             'message' => 'Detalles del Usuario',
             'user' => $user,
-            'data' => $courses,
+            'courses' => $courses,
+            'certifications' => $certifications,
         ], 200);
     }
 
