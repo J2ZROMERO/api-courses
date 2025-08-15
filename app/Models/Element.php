@@ -69,24 +69,31 @@ class Element extends Model
             return false;
         }
 
-        // Obtener el curso desde la sección
-        $section = $this->section;
+         // Obtener el curso desde la sección (ahora podría ser desde subsección)
+        $section = $this->section ?? ($this->subsection->section ?? null);
         if (!$section || !$section->course) {
             return false;
         }
 
         $course = $section->course;
 
-        // Obtener todos los elementos ordenados por sección y por posición
+        // Obtener todos los elementos ordenados por sección, subsección y posición
         $elements = $course->sections()
-            ->with(['elements' => function ($q) {
-                $q->orderBy('position');
-            }])
+            ->with([
+                'subsections.elements' => function ($q) {
+                    $q->orderBy('position');
+                }
+            ])
             ->orderBy('position')
             ->get()
             ->flatMap(function ($section) {
-                return $section->elements;
-            });
+                return $section->subsections
+                    ->sortBy('position') // Ordenar subsecciones
+                    ->flatMap(function ($subsection) {
+                        return $subsection->elements; // Devolver todos los elementos
+                    });
+            })
+            ->values();
 
         // Buscar la posición del elemento actual
         $index = $elements->search(function ($e) {
