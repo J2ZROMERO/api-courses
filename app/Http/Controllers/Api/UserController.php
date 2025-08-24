@@ -130,6 +130,16 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $user_auth = Auth::user();
+
+        if (!$user_auth || !$user_auth->hasRole('admin')) {
+            $user->assignRole('teacher');
+        }
+
+        if (!$user_auth || !$user_auth->hasRole('teacher')) {
+            $user->assignRole('student');
+        }
+
         return response()->json([
             'message' => 'Usuario registrado',
             'data'    => $user,
