@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class RegisterRequest extends FormRequest
 {
@@ -23,7 +24,11 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email' . optional($this->user)->id, 
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users', 'email')->ignore($this->route('id')),
+            ],
             'password' => $this->method() ==='POST' ? 'required|min:6' : 'nullable',
         ];
     }
